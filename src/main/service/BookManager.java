@@ -10,9 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.BookDAO;
 import main.domain.Book;
 
-public class BookManager
+public class BookManager implements BookDAO
 {
 
     private Connection connection;
@@ -64,7 +65,7 @@ public class BookManager
         return connection;
     }
 
-    void clearBooks()
+    public void clearBooks()
     {
         try
         {

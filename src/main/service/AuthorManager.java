@@ -10,9 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.AuthorDAO;
 import main.domain.Author;
 
-public class AuthorManager
+public class AuthorManager implements AuthorDAO
 {
 
     private Connection connection;
@@ -64,7 +65,7 @@ public class AuthorManager
         return connection;
     }
 
-    void clearAuthors()
+    public void clearAuthors()
     {
         try
         {
