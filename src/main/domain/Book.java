@@ -14,7 +14,7 @@ public class Book
 	{
 
 	}
-	public Book(int idBook, String Title, Date dataWydania, int wydanie)
+	public Book(int idBook, String title, Date relaseDate, int relase)
 	{
 		this.setIdBook(idBook);
 		this.title= title;
@@ -26,23 +26,23 @@ public class Book
 		return title;
 	}
 
-	public void setTitle(String Title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public Date getDataWydania() {
+	public Date getRelaseDate() {
 		return relaseDate;
 	}
 
-	public void setDataWydania(Date dataWydania) {
+	public void setRelaseDate(Date relaseDate) {
 		this.relaseDate = relaseDate;
 	}
 
-	public int getWydanie() {
+	public int getRelase() {
 		return relase;
 	}
 
-	public void setWydanie(int wydanie) {
+	public void setRelase(int relase) {
 		this.relase = relase;
 	}
 
