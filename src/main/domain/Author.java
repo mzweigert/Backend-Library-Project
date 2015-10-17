@@ -2,7 +2,7 @@ package main.domain;
 
 public class Author
 {
-    private int idAutor;
+    private int idAuthor;
     private String name, surname;
 
     public Author()
@@ -10,9 +10,9 @@ public class Author
 
     }
 
-    public Author(int idAutor, String name, String surname)
+    public Author(int idAuthor, String name, String surname)
     {
-        this.idAutor = idAutor;
+        this.idAuthor = idAuthor;
         this.name = name;
         this.surname = surname;
     }
@@ -36,13 +36,13 @@ public class Author
         this.surname = surname;
     }
 
-    public int getIdAutor()
+    public int getIdAuthor()
     {
-        return idAutor;
+        return idAuthor;
     }
 
-    public void setIdAutor(int idAutor)
+    public void setIdAuthor(int idAutor)
     {
-        this.idAutor = idAutor;
+        this.idAuthor = idAuthor;
     }
 }
