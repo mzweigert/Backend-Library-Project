@@ -9,11 +9,9 @@ import java.util.List;
  */
 public interface BookDAO
 {
-    void clearBooks();
 
-    public int addBook(Book book);
-
-    public List<Book> getAllBooks();
+    int addBook(Book book);
+    List<Book> getAllBooks();
 
 
 }

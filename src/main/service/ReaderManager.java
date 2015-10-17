@@ -10,9 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.ReaderDAO;
 import main.domain.Reader;
 
-public class ReaderManager
+public class ReaderManager implements ReaderDAO
 {
 
     private Connection connection;

@@ -65,7 +65,7 @@ public class AuthorManager implements AuthorDAO
         return connection;
     }
 
-    public void clearAuthors()
+    void clearAuthors()
     {
         try
         {

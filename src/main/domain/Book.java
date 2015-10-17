@@ -1,8 +1,9 @@
 package main.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Book
+public class Book implements Serializable
 {
 	
 	private int idBook;

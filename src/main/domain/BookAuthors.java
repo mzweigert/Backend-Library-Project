@@ -1,6 +1,8 @@
 package main.domain;
 
-public class BookAuthors
+import java.io.Serializable;
+
+public class BookAuthors implements Serializable
 {
 
 	private int idBook, idAuthor ;

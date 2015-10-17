@@ -65,7 +65,7 @@ public class BookManager implements BookDAO
         return connection;
     }
 
-    public void clearBooks()
+    void clearBooks()
     {
         try
         {

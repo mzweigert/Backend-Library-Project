@@ -9,10 +9,8 @@ import java.util.List;
  */
 public interface AuthorDAO
 {
-    void clearAuthors();
 
-    public int addAuthor(Author author);
-
-    public List<Author> getAllAuthors();
+    int addAuthor(Author author);
+    List<Author> getAllAuthors();
 
 }

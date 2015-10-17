@@ -10,9 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.OrderDAO;
 import main.domain.Order;
 
-public class OrderManager
+public class OrderManager implements OrderDAO
 {
 
     private Connection connection;

@@ -1,8 +1,9 @@
 package main.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Reader
+public class Reader implements Serializable
 {
 	private int idReader;
 	private String name,surname;

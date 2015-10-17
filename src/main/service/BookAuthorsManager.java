@@ -10,9 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.BookAuthorsDAO;
 import main.domain.BookAuthors;
 
-public class BookAuthorsManager
+public class BookAuthorsManager implements BookAuthorsDAO
 {
 
     private Connection connection;
