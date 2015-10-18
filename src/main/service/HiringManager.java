@@ -83,14 +83,15 @@ public class HiringManager implements HiringDAO
     public List<Hiring> getAllHirings()
     {
         List<Hiring> hirings = new ArrayList<Hiring>();
-
+        Hiring hiring;
         try
         {
             ResultSet rs = getAllHiringsStmt.executeQuery();
 
             while (rs.next())
             {
-                Hiring hiring = new Hiring(rs.getInt("idHiring"), rs.getInt("idBook"),  rs.getInt("idReader"), rs.getDate("hire_date"));
+                hiring = new Hiring( rs.getInt("idBook"),  rs.getInt("idReader"), rs.getDate("hire_date"));
+                hiring.setIdHiring(rs.getInt("idHiring"));
                 hirings.add(hiring);
             }
 
@@ -105,6 +106,7 @@ public class HiringManager implements HiringDAO
     @Override
     public Hiring getHiringById(int idHiring)
     {
+        Hiring hiring;
         try
         {
             getHiringByIdStmt.setInt(1, idHiring);
@@ -112,7 +114,9 @@ public class HiringManager implements HiringDAO
 
             while (rs.next())
             {
-                return new Hiring(rs.getInt("idHiring"), rs.getInt("idBook"), rs.getInt("idReader"), rs.getDate("hire_date"));
+                hiring =  new Hiring( rs.getInt("idBook"), rs.getInt("idReader"), rs.getDate("hire_date"));
+                hiring.setIdHiring(rs.getInt("idHiring"));
+                return  hiring;
             }
         }
         catch (SQLException e)
@@ -127,7 +131,7 @@ public class HiringManager implements HiringDAO
     public List<Hiring> getHiringsByIdReader(int idReader)
     {
         List<Hiring> hiringsByIdReader = new ArrayList<Hiring>();
-
+        Hiring hiring;
         try
         {
             getHiringsByIdReaderStmt.setInt(1, idReader);
@@ -135,7 +139,9 @@ public class HiringManager implements HiringDAO
 
             while (rs.next())
             {
-                hiringsByIdReader.add(new Hiring(rs.getInt("idHiring"), rs.getInt("idBook"), rs.getInt("idReader"), rs.getDate("hire_date")));
+                hiring = new Hiring(rs.getInt("idBook"), rs.getInt("idReader"), rs.getDate("hire_date"));
+                hiring.setIdHiring(rs.getInt("idHiring"));
+                hiringsByIdReader.add(hiring);
             }
 
             return hiringsByIdReader;
@@ -152,7 +158,7 @@ public class HiringManager implements HiringDAO
     public List<Hiring> getHiringsByIdBook(int idBook)
     {
         List<Hiring> hiringsByIdBook = new ArrayList<Hiring>();
-
+        Hiring hiring;
         try
         {
             getHiringsByIdBookStmt.setInt(1, idBook);
@@ -160,7 +166,9 @@ public class HiringManager implements HiringDAO
 
             while (rs.next())
             {
-                hiringsByIdBook.add(new Hiring(rs.getInt("idHiring"), rs.getInt("idBook"), rs.getInt("idReader"), rs.getDate("hire_date")));
+                hiring = new Hiring(rs.getInt("idBook"), rs.getInt("idReader"), rs.getDate("hire_date"));
+                hiring.setIdHiring(rs.getInt("idHiring"));
+                hiringsByIdBook.add(hiring);
             }
 
             return hiringsByIdBook;

@@ -79,14 +79,15 @@ public class ReaderManager implements ReaderDAO
     public List<Reader> getAllReaders()
     {
         List<Reader> readers = new ArrayList<Reader>();
-
+        Reader reader;
         try
         {
             ResultSet rs = getAllReadersStmt.executeQuery();
 
             while (rs.next())
             {
-                Reader reader = new Reader(rs.getInt("idReader"), rs.getString("name"), rs.getString("surname"), rs.getDate("join_date"), rs.getInt("extra_points"));
+                reader = new Reader( rs.getString("name"), rs.getString("surname"), rs.getDate("join_date"), rs.getInt("extra_points"));
+                reader.setIdReader(rs.getInt("idReader"));
                 readers.add(reader);
             }
 
@@ -101,6 +102,7 @@ public class ReaderManager implements ReaderDAO
     @Override
     public Reader getReaderById(int idReader)
     {
+        Reader reader;
         try
         {
             getReaderByIdStmt.setInt(1, idReader);
@@ -108,7 +110,9 @@ public class ReaderManager implements ReaderDAO
 
             while (rs.next())
             {
-                return new Reader(rs.getInt("idReader"), rs.getString("name"), rs.getString("surname"), rs.getDate("join_date"),rs.getInt("extra_points"));
+                reader = new Reader(rs.getString("name"), rs.getString("surname"), rs.getDate("join_date"),rs.getInt("extra_points"));
+                reader.setIdReader(rs.getInt("idReader"));
+                return reader;
             }
         }
         catch (SQLException e)
@@ -123,7 +127,7 @@ public class ReaderManager implements ReaderDAO
     public List<Reader> getReadersBySurname(String surname)
     {
         List<Reader> readersBySurname = new ArrayList<Reader>();
-
+        Reader reader;
         try
         {
             getReaderBySurnameStmt.setString(1, surname);
@@ -131,7 +135,9 @@ public class ReaderManager implements ReaderDAO
 
             while (rs.next())
             {
-                readersBySurname.add(new Reader(rs.getInt("idReader"), rs.getString("name"), rs.getString("surname"), rs.getDate("join_date"),rs.getInt("extra_points")));
+                reader = new Reader(rs.getString("name"), rs.getString("surname"), rs.getDate("join_date"),rs.getInt("extra_points"));
+                reader.setIdReader(rs.getInt("idReader"));
+                readersBySurname.add(reader);
             }
 
             return readersBySurname;

@@ -80,14 +80,15 @@ public class AuthorManager implements AuthorDAO
     public List<Author> getAllAuthors()
     {
         List<Author> authors = new ArrayList<Author>();
-
+        Author author;
         try
         {
             ResultSet rs = getAllAuthorsStmt.executeQuery();
 
             while (rs.next())
             {
-                Author author = new Author(rs.getInt("idAuthor"), rs.getString("name"), rs.getString("surname"));
+                author = new Author( rs.getString("name"), rs.getString("surname"));
+                author.setIdAuthor(rs.getInt("idAuthor"));
                 authors.add(author);
             }
             return authors;
@@ -103,6 +104,7 @@ public class AuthorManager implements AuthorDAO
     }
     public Author getAuthorById(int idAuthor)
     {
+        Author author;
         try
         {
             getAuthorByIdStmt.setInt(1, idAuthor);
@@ -110,7 +112,9 @@ public class AuthorManager implements AuthorDAO
 
             while (rs.next())
             {
-                return new Author(rs.getInt("idAuthor"), rs.getString("name"), rs.getString("surname"));
+                author = new Author(rs.getString("name"), rs.getString("surname"));
+                author.setIdAuthor(rs.getInt("idAuthor"));
+                return author;
             }
         }
         catch (SQLException e)
@@ -123,7 +127,7 @@ public class AuthorManager implements AuthorDAO
     public List<Author> getAuthorBySurname(String surname)
     {
         List<Author> authorsBySurname = new ArrayList<Author>();
-
+        Author author;
         try
         {
             getAuthorBySurnameStmt.setString(1, surname);
@@ -131,7 +135,9 @@ public class AuthorManager implements AuthorDAO
 
             while (rs.next())
             {
-                authorsBySurname.add(new Author(rs.getInt("idAuthor"), rs.getString("name"), rs.getString("surname")));
+                author = new Author(rs.getString("name"), rs.getString("surname"));
+                author.setIdAuthor(rs.getInt("idAuthor"));
+                authorsBySurname.add(author);
             }
 
             return authorsBySurname;

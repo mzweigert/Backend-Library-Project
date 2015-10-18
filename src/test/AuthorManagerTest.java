@@ -16,6 +16,13 @@ public class AuthorManagerTest
     {
         assertNotNull(authorManager.getConnection());
     }
+    @Test
+    public void checkAddingAuthor()
+    {
+        int size = authorManager.getAllAuthors().size();
 
+        authorManager.addAuthor(new Author())
+
+    }
 
 }

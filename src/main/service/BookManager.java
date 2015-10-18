@@ -82,14 +82,15 @@ public class BookManager implements BookDAO
     public List<Book> getAllBooks()
     {
         List<Book> books = new ArrayList<Book>();
-
+        Book book;
         try
         {
             ResultSet rs = getAllBooksStmt.executeQuery();
 
             while (rs.next())
             {
-                Book book = new Book(rs.getInt("idBook"), rs.getString("title"),  rs.getDate("relase_date"), rs.getInt("relase"));
+                book = new Book(rs.getString("title"), rs.getDate("relase_date"), rs.getInt("relase"));
+                book.setIdBook(rs.getInt("idBook"));
                 books.add(book);
             }
 
@@ -104,6 +105,7 @@ public class BookManager implements BookDAO
     @Override
     public Book getBookById(int idBook)
     {
+        Book book;
         try
         {
             getBookByIdStmt.setInt(1, idBook);
@@ -111,7 +113,9 @@ public class BookManager implements BookDAO
 
             while (rs.next())
             {
-                return new Book(rs.getInt("idBook"), rs.getString("title"), rs.getDate("relase_date"), rs.getInt("relase"));
+                book = new Book(rs.getString("title"), rs.getDate("relase_date"), rs.getInt("relase"));
+                book.setIdBook(rs.getInt("idBook"));
+                return book;
             }
         }
         catch (SQLException e)
@@ -126,7 +130,7 @@ public class BookManager implements BookDAO
     public List<Book> getBookByTitle(String title)
     {
         List<Book> booksByTitle = new ArrayList<Book>();
-
+        Book book;
         try
         {
             getBookByTitleStmt.setString(1, title);
@@ -134,7 +138,9 @@ public class BookManager implements BookDAO
 
             while (rs.next())
             {
-                booksByTitle.add(new Book(rs.getInt("idBook"), rs.getString("title"), rs.getDate("relase_date"), rs.getInt("relase")));
+                book = new Book(rs.getString("title"), rs.getDate("relase_date"), rs.getInt("relase"));
+                book.setIdBook(rs.getInt("idBook"));
+                booksByTitle.add(book);
             }
 
             return booksByTitle;
