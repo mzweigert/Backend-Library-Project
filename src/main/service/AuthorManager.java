@@ -61,7 +61,7 @@ public class AuthorManager implements AuthorDAO
 
             getAuthorByIdStmt = connection.prepareStatement("SELECT * FROM Author WHERE idAuthor = ?");
             getAuthorBySurnameStmt = connection.prepareStatement("SELECT * FROM Author WHERE surname='?' ");
-            updateAuthorStmt = connection.prepareStatement("UPDATE Author SET name='?', surname='?' WHERE idAutor = ?");
+            updateAuthorStmt = connection.prepareStatement("UPDATE Author SET name='?', surname='?' WHERE idAuthor = ?");
             deleteAuthorStmt = connection.prepareStatement("DELETE Author WHERE idAuthor = ?");
             addAuthorStmt = connection.prepareStatement("INSERT INTO Author (name, surname) VALUES (?, ?)");
 

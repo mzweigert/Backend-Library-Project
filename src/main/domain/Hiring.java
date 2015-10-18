@@ -8,15 +8,15 @@ public class Hiring implements Serializable
 
     private int idHiring;
     private int idBook, idReader;
-    private Date orderDate;
+    private Date hireDate;
 
 
-    public Hiring(int idHiring, int idBook, int idReader, Date orderDate)
+    public Hiring(int idHiring, int idBook, int idReader, Date hireDate)
     {
         this.idHiring = idHiring;
         this.idBook = idBook;
         this.idReader = idReader;
-        this.orderDate = orderDate;
+        this.hireDate = hireDate;
     }
 
 
@@ -37,12 +37,12 @@ public class Hiring implements Serializable
         this.idReader = idReader;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public Date getHireDate() {
+        return hireDate;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
     }
 
     public int getIdHiring() {

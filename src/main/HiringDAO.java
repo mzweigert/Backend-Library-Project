@@ -9,8 +9,12 @@ import java.util.List;
  */
 public interface HiringDAO
 {
-
-    int addHiring(Hiring hiring);
     List<Hiring> getAllHirings();
+    Hiring getHiringById(int idHiring);
+    List<Hiring> getHiringsByIdReader(int idReader);
+    List<Hiring> getHiringsByIdBook(int idBook);
+    boolean updateHiring(Hiring hiring);
+    boolean deleteHiring(Hiring hiring);
+    boolean addHiring(Hiring hiring);
 
 }
