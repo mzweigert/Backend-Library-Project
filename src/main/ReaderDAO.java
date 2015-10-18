@@ -9,7 +9,11 @@ import java.util.List;
  */
 public interface ReaderDAO
 {
-    int addReader(Reader reader);
     List<Reader> getAllReaders();
+    Reader getReaderById(int idReader);
+    List<Reader> getReadersBySurname(String surname);
+    boolean updateReader(Reader reader);
+    boolean deleteReader(Reader reader);
+    boolean addReader(Reader reader);
 
 }
