@@ -43,7 +43,7 @@ public class Author implements Serializable
         return idAuthor;
     }
 
-    public void setIdAuthor(int idAutor)
+    public void setIdAuthor(int idAuthor)
     {
         this.idAuthor = idAuthor;
     }

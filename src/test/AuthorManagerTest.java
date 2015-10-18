@@ -2,6 +2,7 @@ package test;
 
 import main.domain.Author;
 import main.service.AuthorManager;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 /**
@@ -10,19 +11,51 @@ import static org.junit.Assert.*;
 public class AuthorManagerTest
 {
     AuthorManager authorManager = new AuthorManager();
+    Author author;
+    int sizeBefore;
+    int sizeAfter;
+
 
     @Test
     public void checkConnection()
     {
         assertNotNull(authorManager.getConnection());
     }
+   /* @Test
+    public void checkClearingAuthors()
+    {
+        authorManager.clearAuthors();
+        assertEquals(authorManager.getAllAuthors().size(), 0);
+    }
+    */
     @Test
     public void checkAddingAuthor()
     {
-        int size = authorManager.getAllAuthors().size();
-        authorManager.addAuthor(new Author("Mateusz", "Zweigert"));
-        assertTrue(authorManager.getAllAuthors().size() > size);
+        authorManager.clearAuthors();
+        assertEquals(authorManager.addAuthor(new Author("Andrzej", "Strzelba")), 1);
     }
+    @Test
+    public void checkDeletingAuthor()
+    {
+        authorManager.clearAuthors();
+        authorManager.addAuthor(new Author("Mateusz", "Strzelba"));
+        author = authorManager.getAllAuthors().get(0);
+        assertEquals(authorManager.deleteAuthor(author) , 1);
+
+    }
+    @Test
+    public void checkUpdatingAuthor()
+    {
+        authorManager.clearAuthors();
+
+        authorManager.addAuthor(new Author("Mateusz", "Maklowicz"));
+        author = authorManager.getAllAuthors().get(0);
+        author.setName("Robert");
+
+        assertEquals(authorManager.updateAuthor(author), 1);
+        assertEquals(authorManager.getAllAuthors().get(0).getName(), author.getName());
+    }
+
 
 
 }

@@ -61,7 +61,7 @@ public class AuthorManager implements AuthorDAO
 
             getAuthorByIdStmt = connection.prepareStatement("SELECT * FROM Author WHERE idAuthor = ?");
             getAuthorBySurnameStmt = connection.prepareStatement("SELECT * FROM Author WHERE surname='?' ");
-            updateAuthorStmt = connection.prepareStatement("UPDATE Author SET name='?', surname='?' WHERE idAuthor = ?");
+            updateAuthorStmt = connection.prepareStatement("UPDATE Author SET name=?, surname=? WHERE idAuthor = ?");
             deleteAuthorStmt = connection.prepareStatement("DELETE Author WHERE idAuthor = ?");
             addAuthorStmt = connection.prepareStatement("INSERT INTO Author (name, surname) VALUES (?, ?)");
 
@@ -90,6 +90,7 @@ public class AuthorManager implements AuthorDAO
                 author = new Author( rs.getString("name"), rs.getString("surname"));
                 author.setIdAuthor(rs.getInt("idAuthor"));
                 authors.add(author);
+
             }
             return authors;
 
@@ -149,55 +150,57 @@ public class AuthorManager implements AuthorDAO
 
         return null;
     }
-    public boolean updateAuthor(Author author)
+    public int updateAuthor(Author author)
     {
+        int count = 0;
         try
         {
             updateAuthorStmt.setString(1, author.getName());
             updateAuthorStmt.setString(2, author.getSurname());
             updateAuthorStmt.setInt(3, author.getIdAuthor());
 
-            updateAuthorStmt.executeUpdate();
-            return true;
+            count = updateAuthorStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
-    public boolean deleteAuthor(Author author)
+    public int deleteAuthor(Author author)
     {
+        int count = 0;
         try
         {
             deleteAuthorStmt.setInt(1, author.getIdAuthor());
-            deleteAuthorStmt.executeUpdate();
-            return true;
+            count = deleteAuthorStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return false;
+        return count;
     }
-    public boolean addAuthor(Author author)
+    public int addAuthor(Author author)
     {
-
+        int count = 0;
         try
         {
             addAuthorStmt.setString(1, author.getName());
             addAuthorStmt.setString(2, author.getSurname());
 
-            addAuthorStmt.executeUpdate();
-            return true;
+            count = addAuthorStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
-            return false;
-        }
 
+        }
+        return count;
     }
     public void clearAuthors()
     {
