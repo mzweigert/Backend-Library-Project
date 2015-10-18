@@ -20,9 +20,9 @@ public class AuthorManagerTest
     public void checkAddingAuthor()
     {
         int size = authorManager.getAllAuthors().size();
-
-        authorManager.addAuthor(new Author())
-
+        authorManager.addAuthor(new Author("Mateusz", "Zweigert"));
+        assertTrue(authorManager.getAllAuthors().size() > size);
     }
+
 
 }
