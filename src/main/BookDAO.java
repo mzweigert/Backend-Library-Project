@@ -13,9 +13,9 @@ public interface BookDAO
     List<Book> getAllBooks();
     Book getBookById(int idBook);
     List<Book> getBookByTitle(String title);
-    boolean updateBook(Book book);
-    boolean deleteBook(Book book);
-    boolean addBook(Book book);
+    int updateBook(Book book);
+    int deleteBook(Book book);
+    int addBook(Book book);
 
 
 }

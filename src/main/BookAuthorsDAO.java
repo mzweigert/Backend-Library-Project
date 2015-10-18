@@ -18,10 +18,10 @@ public interface BookAuthorsDAO
     List<BookAuthors> getBookAuthorsByIdBook(int idBook);
     BookAuthors getBookAuthors(int idAuthor, int idBook);
 
-    boolean updateBookAuthors(BookAuthors bookAuthors);
-    boolean deleteBookAuthors(BookAuthors bookAuthors);
+    int updateBookAuthors(BookAuthors bookAuthors, int idAuthor, int idBook);
+    int deleteBookAuthors(BookAuthors bookAuthors);
 
-    boolean addBookAuthors(BookAuthors bookAuthors);
+    int addBookAuthors(BookAuthors bookAuthors);
 
 
 

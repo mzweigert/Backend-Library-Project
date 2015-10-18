@@ -58,7 +58,7 @@ public class BookManager implements BookDAO
             getAllBooksStmt = connection.prepareStatement("SELECT idBook, title, relase_date, relase FROM Book");
             getBookByIdStmt = connection.prepareStatement("SELECT * FROM Book WHERE idBook = ?");
             getBookByTitleStmt = connection.prepareStatement("SELECT * FROM Book WHERE title = ?");
-            updateBookStmt = connection.prepareStatement("UPDATE Book SET title = '?', relase_date = '?', relase = ? ");
+            updateBookStmt = connection.prepareStatement("UPDATE Book SET title = ?, relase_date = ?, relase = ? ");
             deleteBookStmt = connection.prepareStatement("DELETE Book WHERE idBook = ? ");
             addBookStmt = connection.prepareStatement("INSERT INTO Book (title, relase_date, relase) VALUES (?, ?, ?)");
 
@@ -72,7 +72,7 @@ public class BookManager implements BookDAO
         }
     }
 
-    Connection getConnection()
+    public Connection getConnection()
     {
         return connection;
     }
@@ -154,32 +154,34 @@ public class BookManager implements BookDAO
     }
 
     @Override
-    public boolean updateBook(Book book)
+    public int updateBook(Book book)
     {
+        int count = 0;
         try
         {
             updateBookStmt.setString(1, book.getTitle());
             updateBookStmt.setDate(2, book.getRelaseDate());
             updateBookStmt.setInt(3, book.getRelase());
 
-            updateBookStmt.executeUpdate();
-            return true;
+            count = updateBookStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
 
     @Override
-    public boolean deleteBook(Book book)
+    public int deleteBook(Book book)
     {
+        int count = 0;
         try
         {
             deleteBookStmt.setInt(1, book.getIdBook());
-            deleteBookStmt.executeUpdate();
-            return true;
+            count = deleteBookStmt.executeUpdate();
+
 
         }
         catch (SQLException e)
@@ -187,12 +189,12 @@ public class BookManager implements BookDAO
             e.printStackTrace();
         }
 
-        return false;
+        return count;
     }
 
-    public boolean addBook(Book Book)
+    public int addBook(Book Book)
     {
-
+        int count = 0;
         try
         {
             addBookStmt.setString(1, Book.getTitle());
@@ -200,17 +202,17 @@ public class BookManager implements BookDAO
             addBookStmt.setInt(3, Book.getRelase());
 
 
-            addBookStmt.executeUpdate();
-            return  true;
+            count = addBookStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
 
-    void clearBooks()
+    public void clearBooks()
     {
         try
         {

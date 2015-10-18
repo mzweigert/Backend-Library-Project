@@ -2,7 +2,7 @@ package test;
 
 import main.domain.Author;
 import main.service.AuthorManager;
-import org.junit.Assert;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,8 +16,6 @@ public class AuthorManagerTest
 {
     AuthorManager authorManager = new AuthorManager();
     Author author;
-    int sizeBefore;
-    int sizeAfter;
 
 
     @Test
@@ -25,13 +23,13 @@ public class AuthorManagerTest
     {
         assertNotNull(authorManager.getConnection());
     }
-   /* @Test
+    @Test
     public void checkClearingAuthors()
     {
         authorManager.clearAuthors();
         assertEquals(authorManager.getAllAuthors().size(), 0);
     }
-    */
+
     @Test
     public void checkAddingAuthor()
     {

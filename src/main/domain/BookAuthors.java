@@ -5,17 +5,16 @@ import java.io.Serializable;
 public class BookAuthors implements Serializable
 {
 
-	private int idBook, idAuthor ;
+	private int idAuthor, idBook;
 
 	public BookAuthors()
 	{
 
 	}
-	public BookAuthors(int idBook, int idAuthor)
+	public BookAuthors(int idAuthor, int idBook)
 	{
-		
-		this.idBook = idBook;
 		this.idAuthor = idAuthor;
+		this.idBook = idBook;
 	}
 
 

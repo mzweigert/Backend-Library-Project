@@ -75,7 +75,7 @@ public class BookAuthorsManager implements BookAuthorsDAO
         }
     }
 
-    Connection getConnection()
+    public Connection getConnection()
     {
         return connection;
     }
@@ -166,7 +166,7 @@ public class BookAuthorsManager implements BookAuthorsDAO
 
             while (rs.next())
             {
-                return new BookAuthors(rs.getInt("idBook"), rs.getInt("idAuthor"));
+                return new BookAuthors( rs.getInt("idAuthor"), rs.getInt("idBook"));
             }
         }
         catch (SQLException e)
@@ -178,59 +178,63 @@ public class BookAuthorsManager implements BookAuthorsDAO
     }
 
     @Override
-    public boolean updateBookAuthors(BookAuthors bookAuthors)
+    public int updateBookAuthors(BookAuthors bookAuthors, int idAutor, int idBook)
     {
+        int count = 0;
         try
         {
-            updateBookAuthorsStmt.setInt(1, bookAuthors.getIdAuthor());
-            updateBookAuthorsStmt.setInt(2, bookAuthors.getIdBook());
+            updateBookAuthorsStmt.setInt(1, idAutor);
+            updateBookAuthorsStmt.setInt(2, idBook);
 
-            updateBookAuthorsStmt.executeUpdate();
-            return true;
+            updateBookAuthorsStmt.setInt(3, bookAuthors.getIdAuthor());
+            updateBookAuthorsStmt.setInt(4, bookAuthors.getIdBook());
+
+            count = updateBookAuthorsStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
     @Override
-    public boolean deleteBookAuthors(BookAuthors bookAuthors)
+    public int deleteBookAuthors(BookAuthors bookAuthors)
     {
+        int count = 0;
         try
         {
-            deleteAllBookAuthorsStmt.setInt(1, bookAuthors.getIdAuthor());
-            deleteAllBookAuthorsStmt.setInt(2, bookAuthors.getIdBook());
+            deleteBookAuthorsStmt.setInt(1, bookAuthors.getIdAuthor());
+            deleteBookAuthorsStmt.setInt(2, bookAuthors.getIdBook());
 
-            deleteAllBookAuthorsStmt.executeUpdate();
-            return true;
+            count = deleteBookAuthorsStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
-    public boolean addBookAuthors(BookAuthors bookAuthors)
+    public int addBookAuthors(BookAuthors bookAuthors)
     {
-
+        int count = 0;
         try
         {
             addBookAuthorsStmt.setInt(1, bookAuthors.getIdAuthor());
             addBookAuthorsStmt.setInt(2, bookAuthors.getIdBook());
 
-            addBookAuthorsStmt.executeUpdate();
-            return true;
+            count = addBookAuthorsStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
 
-
-    void clearBookAuthors()
+    public void clearBookAuthors()
     {
         try
         {
