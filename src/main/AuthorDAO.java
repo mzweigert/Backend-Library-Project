@@ -9,8 +9,12 @@ import java.util.List;
  */
 public interface AuthorDAO
 {
-
-    int addAuthor(Author author);
     List<Author> getAllAuthors();
+    Author getAuthorById(int idAuthor);
+    List<Author> getAuthorBySurname(String surname);
+    boolean updateAuthor(Author author);
+    boolean deleteAuthor(Author author);
+    boolean addAuthor(Author author);
+
 
 }
