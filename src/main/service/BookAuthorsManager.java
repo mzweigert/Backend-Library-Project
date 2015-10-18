@@ -19,7 +19,7 @@ public class BookAuthorsManager implements BookAuthorsDAO
 
     private Connection connection;
 
-    private String url = "jdbc:hsqldb:hsql://localhost/mzweigert";
+    private String url = "jdbc:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
 
     private String createTableBookAuthors= "CREATE TABLE BookAuthors(FOREIGN KEY REFERENCES Author(idAuthor),"+
                                                                "FOREIGN KEY REFERENCES Book(idBook),"+
