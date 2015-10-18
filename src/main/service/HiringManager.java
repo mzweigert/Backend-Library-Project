@@ -52,9 +52,9 @@ public class HiringManager implements HiringDAO
             if (!tableExists)
                 statement.executeUpdate(createTableHiring);
 
-            addHiringStmt = connection.prepareStatement("INSERT INTO Hiring (idBook, idReader, Hiring_date) VALUES (?, ?, ?)");
+            addHiringStmt = connection.prepareStatement("INSERT INTO Hiring (idBook, idReader, hire_date) VALUES (?, ?, ?)");
             deleteAllHiringsStmt = connection.prepareStatement("DELETE FROM Hiring");
-            getAllHiringsStmt = connection.prepareStatement("SELECT idHiring, idBook, idReader, Hiring_date FROM Hiring");
+            getAllHiringsStmt = connection.prepareStatement("SELECT idHiring, idBook, idReader, hire_date FROM Hiring");
 
         }
         catch (SQLException e)
@@ -110,7 +110,7 @@ public class HiringManager implements HiringDAO
 
             while (rs.next())
             {
-                Hiring hiring = new Hiring(rs.getInt("idHiring"), rs.getInt("idBook"),  rs.getInt("idReader"), rs.getDate("order_date"));
+                Hiring hiring = new Hiring(rs.getInt("idHiring"), rs.getInt("idBook"),  rs.getInt("idReader"), rs.getDate("hire_date"));
                 hirings.add(hiring);
             }
 
