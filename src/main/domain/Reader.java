@@ -14,9 +14,9 @@ public class Reader implements Serializable
 	{
 
 	}
-	public Reader(int idReader, String name, String surname, Date joinDate, int extraPoints)
+	public Reader(String name, String surname, Date joinDate, int extraPoints)
 	{
-		this.idReader = idReader;
+
 		this.name = name;
 		this.surname = surname;
 		this.joinDate = joinDate;

@@ -1,5 +1,6 @@
 package test;
 
+import main.domain.Author;
 import main.service.AuthorManager;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,4 +16,6 @@ public class AuthorManagerTest
     {
         assertNotNull(authorManager.getConnection());
     }
+
+
 }

@@ -15,9 +15,9 @@ public class Book implements Serializable
 	{
 
 	}
-	public Book(int idBook, String title, Date relaseDate, int relase)
+	public Book(String title, Date relaseDate, int relase)
 	{
-		this.setIdBook(idBook);
+		super();
 		this.title= title;
 		this.relaseDate = relaseDate;
 		this.relase = relase;

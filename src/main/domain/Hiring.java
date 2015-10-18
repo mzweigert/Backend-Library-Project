@@ -11,9 +11,9 @@ public class Hiring implements Serializable
     private Date hireDate;
 
 
-    public Hiring(int idHiring, int idBook, int idReader, Date hireDate)
+    public Hiring(int idBook, int idReader, Date hireDate)
     {
-        this.idHiring = idHiring;
+        super();
         this.idBook = idBook;
         this.idReader = idReader;
         this.hireDate = hireDate;

@@ -12,9 +12,9 @@ public class Author implements Serializable
 
     }
 
-    public Author(int idAuthor, String name, String surname)
+    public Author(String name, String surname)
     {
-        this.idAuthor = idAuthor;
+        super();
         this.name = name;
         this.surname = surname;
     }

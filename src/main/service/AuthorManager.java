@@ -193,7 +193,7 @@ public class AuthorManager implements AuthorDAO
         }
 
     }
-    void clearAuthors()
+    public void clearAuthors()
     {
         try
         {
