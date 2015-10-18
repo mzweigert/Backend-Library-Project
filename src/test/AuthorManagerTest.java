@@ -4,6 +4,10 @@ import main.domain.Author;
 import main.service.AuthorManager;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 /**
  * Created by MATEUSZ on 2015-10-18.
@@ -28,7 +32,7 @@ public class AuthorManagerTest
         assertEquals(authorManager.getAllAuthors().size(), 0);
     }
     */
-    @Test
+/*    @Test
     public void checkAddingAuthor()
     {
         authorManager.clearAuthors();
@@ -55,7 +59,25 @@ public class AuthorManagerTest
         assertEquals(authorManager.updateAuthor(author), 1);
         assertEquals(authorManager.getAllAuthors().get(0).getName(), author.getName());
     }
+*/
+    @Test
+    public void checkGettingAuthorBySurname()
+    {
+        List<Author> authors = new ArrayList<Author>();
+        authorManager.clearAuthors();
+        authorManager.addAuthor(new Author("Siwy", "Lewy"));
+        authorManager.addAuthor(new Author("Czarny", "Lewy"));
+        authorManager.addAuthor(new Author("Czerwony", "Lewy"));
+        authorManager.addAuthor(new Author("Czerwony", "Czerwony"));
 
+        authors = authorManager.getAuthorBySurname("Lewy");
+
+        assertEquals(authors.size(), 3);
+
+        for(int i= 0; i<authors.size() ; i++)
+            assertEquals(authors.get(i).getSurname(), "Lewy");
+
+    }
 
 
 }
