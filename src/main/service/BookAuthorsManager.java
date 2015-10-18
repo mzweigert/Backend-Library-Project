@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.BookAuthorsDAO;
+import main.domain.Author;
 import main.domain.BookAuthors;
 
 public class BookAuthorsManager implements BookAuthorsDAO
@@ -23,10 +24,16 @@ public class BookAuthorsManager implements BookAuthorsDAO
     private String createTableBookAuthors= "CREATE TABLE BookAuthors(FOREIGN KEY REFERENCES Author(idAuthor),"+
                                                                "FOREIGN KEY REFERENCES Book(idBook),"+
                                                                "Primary Key (idAuthor, idBook))";
-
-    private PreparedStatement addBookAuthorstmt;
-    private PreparedStatement deleteAllBookAuthorsStmt;
     private PreparedStatement getAllBookAuthorsStmt;
+    private PreparedStatement getBookAuthorsByIdAuthorStmt;
+    private PreparedStatement getBookAuthorsByIdBookStmt;
+    private PreparedStatement getBookAuthorsStmt;
+    private PreparedStatement updateBookAuthorsStmt;
+    private PreparedStatement deleteBookAuthorsStmt;
+    private PreparedStatement addBookAuthorsStmt;
+
+    private PreparedStatement deleteAllBookAuthorsStmt;
+
 
     private Statement statement;
 
@@ -51,9 +58,15 @@ public class BookAuthorsManager implements BookAuthorsDAO
             if (!tableExists)
                 statement.executeUpdate(createTableBookAuthors);
 
-            addBookAuthorstmt = connection.prepareStatement("INSERT INTO BookAuthors(idAuthor, idBook) VALUES (?, ?)");
-            deleteAllBookAuthorsStmt = connection.prepareStatement("DELETE FROM BookAuthors");
             getAllBookAuthorsStmt = connection.prepareStatement("SELECT  idAuthor, idBook FROM BookAuthors");
+            getBookAuthorsByIdAuthorStmt = connection.prepareStatement("SELECT * FROM BookAuthors WHERE idAuthor = ?");
+            getBookAuthorsByIdBookStmt = connection.prepareStatement("SELECT * FROM BookAuthors WHERE idBook = ?");
+            getBookAuthorsStmt = connection.prepareStatement("SELECT * FROM BookAuthors WHERE idAuthor = ? AND idBook = ?");
+            updateBookAuthorsStmt = connection.prepareStatement("UPDATE BookAuthors SET idAuthor = ?, idBook = ? WHERE idAuthor = ? AND idBook = ?");
+            deleteBookAuthorsStmt = connection.prepareStatement("DELETE BookAuthors WHERE idAuthor = ? AND idBook = ?");
+
+            addBookAuthorsStmt = connection.prepareStatement("INSERT INTO BookAuthors(idAuthor, idBook) VALUES (?, ?)");
+            deleteAllBookAuthorsStmt = connection.prepareStatement("DELETE FROM BookAuthors");
 
         }
         catch (SQLException e)
@@ -67,35 +80,7 @@ public class BookAuthorsManager implements BookAuthorsDAO
         return connection;
     }
 
-    void clearBookAuthors()
-    {
-        try
-        {
-            deleteAllBookAuthorsStmt.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
-    public int addBookAuthors(BookAuthors bookAuthors)
-    {
-        int count = 0;
-        try
-        {
-            addBookAuthorstmt.setInt(1, bookAuthors.getIdAuthor());
-            addBookAuthorstmt.setInt(2, bookAuthors.getIdBook());
-
-            count = addBookAuthorstmt.executeUpdate();
-
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return count;
-    }
 
     public List<BookAuthors> getAllBookAuthors()
     {
@@ -117,6 +102,144 @@ public class BookAuthorsManager implements BookAuthorsDAO
             e.printStackTrace();
         }
         return bookAuthors;
+    }
+
+    @Override
+    public List<BookAuthors>  getBookAuthorsByIdAuthor(int idAuthor)
+    {
+        List<BookAuthors> bookAuthorsByIdAuthor = new ArrayList<BookAuthors>();
+
+        try
+        {
+            getBookAuthorsByIdAuthorStmt.setInt(1, idAuthor);
+            ResultSet rs = getBookAuthorsByIdAuthorStmt.executeQuery();
+
+            while (rs.next())
+            {
+                bookAuthorsByIdAuthor.add(new BookAuthors(rs.getInt("idAuthor"), rs.getInt("idBook")));
+            }
+
+            return bookAuthorsByIdAuthor;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<BookAuthors> getBookAuthorsByIdBook(int idBook)
+    {
+        List<BookAuthors> bookAuthorsByIdBook = new ArrayList<BookAuthors>();
+
+        try
+        {
+            getBookAuthorsByIdBookStmt.setInt(1, idBook);
+            ResultSet rs = getBookAuthorsByIdBookStmt.executeQuery();
+
+            while (rs.next())
+            {
+                bookAuthorsByIdBook.add(new BookAuthors(rs.getInt("idAuthor"), rs.getInt("idBook")));
+            }
+
+            return bookAuthorsByIdBook;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public BookAuthors getBookAuthors(int idAuthor, int idBook)
+    {
+        try
+        {
+            getBookAuthorsStmt.setInt(1, idAuthor);
+            getBookAuthorsStmt.setInt(2, idBook);
+
+            ResultSet rs = getBookAuthorsStmt.executeQuery();
+
+            while (rs.next())
+            {
+                return new BookAuthors(rs.getInt("idBook"), rs.getInt("idAuthor"));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean updateBookAuthors(BookAuthors bookAuthors)
+    {
+        try
+        {
+            updateBookAuthorsStmt.setInt(1, bookAuthors.getIdAuthor());
+            updateBookAuthorsStmt.setInt(2, bookAuthors.getIdBook());
+
+            updateBookAuthorsStmt.executeUpdate();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    @Override
+    public boolean deleteBookAuthors(BookAuthors bookAuthors)
+    {
+        try
+        {
+            deleteAllBookAuthorsStmt.setInt(1, bookAuthors.getIdAuthor());
+            deleteAllBookAuthorsStmt.setInt(2, bookAuthors.getIdBook());
+
+            deleteAllBookAuthorsStmt.executeUpdate();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean addBookAuthors(BookAuthors bookAuthors)
+    {
+
+        try
+        {
+            addBookAuthorsStmt.setInt(1, bookAuthors.getIdAuthor());
+            addBookAuthorsStmt.setInt(2, bookAuthors.getIdBook());
+
+            addBookAuthorsStmt.executeUpdate();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    void clearBookAuthors()
+    {
+        try
+        {
+            deleteAllBookAuthorsStmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }

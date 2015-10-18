@@ -1,6 +1,7 @@
 package main;
 
 
+import main.domain.Author;
 import main.domain.BookAuthors;
 
 import java.util.List;
@@ -11,8 +12,19 @@ import java.util.List;
 public interface BookAuthorsDAO
 {
 
-    int addBookAuthors(BookAuthors bookAuthors);
 
     List<BookAuthors> getAllBookAuthors();
+    List<BookAuthors> getBookAuthorsByIdAuthor(int idAuthor);
+    List<BookAuthors> getBookAuthorsByIdBook(int idBook);
+    BookAuthors getBookAuthors(int idAuthor, int idBook);
+
+    boolean updateBookAuthors(BookAuthors bookAuthors);
+    boolean deleteBookAuthors(BookAuthors bookAuthors);
+
+    boolean addBookAuthors(BookAuthors bookAuthors);
+
+
+
+
 
 }
