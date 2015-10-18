@@ -32,7 +32,7 @@ public class AuthorManagerTest
         assertEquals(authorManager.getAllAuthors().size(), 0);
     }
     */
-/*    @Test
+    @Test
     public void checkAddingAuthor()
     {
         authorManager.clearAuthors();
@@ -59,11 +59,12 @@ public class AuthorManagerTest
         assertEquals(authorManager.updateAuthor(author), 1);
         assertEquals(authorManager.getAllAuthors().get(0).getName(), author.getName());
     }
-*/
+
     @Test
     public void checkGettingAuthorBySurname()
     {
         List<Author> authors = new ArrayList<Author>();
+
         authorManager.clearAuthors();
         authorManager.addAuthor(new Author("Siwy", "Lewy"));
         authorManager.addAuthor(new Author("Czarny", "Lewy"));
@@ -79,5 +80,20 @@ public class AuthorManagerTest
 
     }
 
+    @Test
+    public void checkGettingAuthorById()
+    {
+
+        Author authorFromDataBase;
+        authorManager.clearAuthors();
+        authorManager.addAuthor(new Author("Mariusz", "Buzianocnik"));
+        author = authorManager.getAllAuthors().get(0);
+
+        authorFromDataBase = authorManager.getAuthorById(author.getIdAuthor()/* ID AUTHOR FROM COLLECTION LIST */);
+
+        assertEquals(author.getIdAuthor(), authorFromDataBase.getIdAuthor());
+        assertEquals(author.getName(), authorFromDataBase.getName());
+        assertEquals(author.getSurname(), authorFromDataBase.getSurname());
+    }
 
 }
