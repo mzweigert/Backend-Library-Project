@@ -3,6 +3,8 @@ package test;
 import main.domain.Author;
 import main.service.AuthorManager;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -26,20 +28,20 @@ public class AuthorManagerTest
     @Test
     public void checkClearingAuthors()
     {
-        authorManager.clearAuthors();
+
         assertEquals(authorManager.getAllAuthors().size(), 0);
     }
 
     @Test
     public void checkAddingAuthor()
     {
-        authorManager.clearAuthors();
+
         assertEquals(authorManager.addAuthor(new Author("Andrzej", "Strzelba")), 1);
     }
     @Test
     public void checkDeletingAuthor()
     {
-        authorManager.clearAuthors();
+
         authorManager.addAuthor(new Author("Mateusz", "Strzelba"));
         author = authorManager.getAllAuthors().get(0);
         assertEquals(authorManager.deleteAuthor(author) , 1);
@@ -48,8 +50,6 @@ public class AuthorManagerTest
     @Test
     public void checkUpdatingAuthor()
     {
-        authorManager.clearAuthors();
-
         authorManager.addAuthor(new Author("Mateusz", "Maklowicz"));
         author = authorManager.getAllAuthors().get(0);
         author.setName("Robert");
@@ -62,14 +62,14 @@ public class AuthorManagerTest
     public void checkGettingAuthorBySurname()
     {
         List<Author> authors = new ArrayList<Author>();
-
-        authorManager.clearAuthors();
-        authorManager.addAuthor(new Author("Siwy", "Lewy"));
+        Author author = new Author("Siwy", "Lewy"); // Obiekt author bêdzie mial zapisane surname jako LEWY/ tym sie posluzymy do wydobycia autorow z nazwiskiem LEWY
+        authorManager.addAuthor(author);
         authorManager.addAuthor(new Author("Czarny", "Lewy"));
         authorManager.addAuthor(new Author("Czerwony", "Lewy"));
         authorManager.addAuthor(new Author("Czerwony", "Czerwony"));
 
-        authors = authorManager.getAuthorBySurname("Lewy");
+
+        authors = authorManager.getAuthorBySurname(author);
 
         assertEquals(authors.size(), 3);
 
@@ -83,15 +83,20 @@ public class AuthorManagerTest
     {
 
         Author authorFromDataBase;
-        authorManager.clearAuthors();
         authorManager.addAuthor(new Author("Mariusz", "Buzianocnik"));
         author = authorManager.getAllAuthors().get(0);
 
-        authorFromDataBase = authorManager.getAuthorById(author.getIdAuthor()/* ID AUTHOR FROM COLLECTION LIST */);
+        authorFromDataBase = authorManager.getAuthorById(author/* ID AUTHOR FROM COLLECTION LIST */);
 
         assertEquals(author.getIdAuthor(), authorFromDataBase.getIdAuthor());
         assertEquals(author.getName(), authorFromDataBase.getName());
         assertEquals(author.getSurname(), authorFromDataBase.getSurname());
     }
 
+
+    @After
+    public void clearAll()
+    {
+        authorManager.clearAuthors();
+    }
 }
