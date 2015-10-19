@@ -103,12 +103,12 @@ public class AuthorManager implements AuthorDAO
         }
 
     }
-    public Author getAuthorById(int idAuthor)
+    public Author getAuthorById(Author author)
     {
-        Author author;
+
         try
         {
-            getAuthorByIdStmt.setInt(1, idAuthor);
+            getAuthorByIdStmt.setInt(1, author.getIdAuthor());
             ResultSet rs = getAuthorByIdStmt.executeQuery();
 
             while (rs.next())
@@ -125,13 +125,13 @@ public class AuthorManager implements AuthorDAO
 
         return null;
     }
-    public List<Author> getAuthorBySurname(String surname)
+    public List<Author> getAuthorBySurname(Author author)
     {
         List<Author> authorsBySurname = new ArrayList<Author>();
-        Author author;
+
         try
         {
-            getAuthorBySurnameStmt.setString(1, surname);
+            getAuthorBySurnameStmt.setString(1, author.getSurname());
             ResultSet rs = getAuthorBySurnameStmt.executeQuery();
 
             while (rs.next())

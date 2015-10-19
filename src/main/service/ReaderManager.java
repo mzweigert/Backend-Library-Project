@@ -100,12 +100,12 @@ public class ReaderManager implements ReaderDAO
     }
 
     @Override
-    public Reader getReaderById(int idReader)
+    public Reader getReaderById(Reader reader)
     {
-        Reader reader;
+
         try
         {
-            getReaderByIdStmt.setInt(1, idReader);
+            getReaderByIdStmt.setInt(1, reader.getIdReader());
             ResultSet rs = getReaderByIdStmt.executeQuery();
 
             while (rs.next())
@@ -124,13 +124,13 @@ public class ReaderManager implements ReaderDAO
     }
 
     @Override
-    public List<Reader> getReadersBySurname(String surname)
+    public List<Reader> getReadersBySurname(Reader reader)
     {
         List<Reader> readersBySurname = new ArrayList<Reader>();
-        Reader reader;
+
         try
         {
-            getReaderBySurnameStmt.setString(1, surname);
+            getReaderBySurnameStmt.setString(1, reader.getSurname());
             ResultSet rs = getReaderBySurnameStmt.executeQuery();
 
             while (rs.next())

@@ -38,7 +38,7 @@ public class BookAuthorsManagerTest
          assertEquals(bookAuthorsManager.getAllBookAuthors().size(), 0);
      }*/
 
-    /*@Test
+    @Test
     public void checkAddingBookAuthors()
     {
         bookAuthorsManager.clearBookAuthors();
@@ -108,7 +108,7 @@ public class BookAuthorsManagerTest
         assertNotEquals(book.getIdBook(), bookAuthors.getIdBook()); // CHECK, THAT idBook FROM bookAuthor is other than idBook from old book obj. IF TRUE - RECORD IS UPDATED
 
     }
-*/
+
     @Test
     public void checkGettingBookAuthors()
     {

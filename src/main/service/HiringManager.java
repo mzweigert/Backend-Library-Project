@@ -104,12 +104,12 @@ public class HiringManager implements HiringDAO
     }
 
     @Override
-    public Hiring getHiringById(int idHiring)
+    public Hiring getHiringById(Hiring hiring)
     {
-        Hiring hiring;
+
         try
         {
-            getHiringByIdStmt.setInt(1, idHiring);
+            getHiringByIdStmt.setInt(1, hiring.getIdHiring());
             ResultSet rs = getHiringByIdStmt.executeQuery();
 
             while (rs.next())
@@ -128,13 +128,12 @@ public class HiringManager implements HiringDAO
     }
 
     @Override
-    public List<Hiring> getHiringsByIdReader(int idReader)
+    public List<Hiring> getHiringsByIdReader(Hiring hiring)
     {
         List<Hiring> hiringsByIdReader = new ArrayList<Hiring>();
-        Hiring hiring;
         try
         {
-            getHiringsByIdReaderStmt.setInt(1, idReader);
+            getHiringsByIdReaderStmt.setInt(1, hiring.getIdReader());
             ResultSet rs = getHiringsByIdReaderStmt.executeQuery();
 
             while (rs.next())
@@ -155,13 +154,12 @@ public class HiringManager implements HiringDAO
     }
 
     @Override
-    public List<Hiring> getHiringsByIdBook(int idBook)
+    public List<Hiring> getHiringsByIdBook(Hiring hiring)
     {
         List<Hiring> hiringsByIdBook = new ArrayList<Hiring>();
-        Hiring hiring;
         try
         {
-            getHiringsByIdBookStmt.setInt(1, idBook);
+            getHiringsByIdBookStmt.setInt(1, hiring.getIdBook());
             ResultSet rs = getHiringsByIdBookStmt.executeQuery();
 
             while (rs.next())

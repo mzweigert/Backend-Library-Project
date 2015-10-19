@@ -5,7 +5,8 @@ import java.io.Serializable;
 public class BookAuthors implements Serializable
 {
 
-	private int idAuthor, idBook;
+
+	private int idBookAuthors, idAuthor, idBook;
 
 	public BookAuthors()
 	{
@@ -17,6 +18,15 @@ public class BookAuthors implements Serializable
 		this.idBook = idBook;
 	}
 
+	public int getIdBookAuthors()
+	{
+		return idBookAuthors;
+	}
+
+	public void setIdBookAuthors(int idBookAuthors)
+	{
+		this.idBookAuthors = idBookAuthors;
+	}
 
 	public int getIdAuthor() {
 		return idAuthor;

@@ -10,9 +10,9 @@ import java.util.List;
 public interface HiringDAO
 {
     List<Hiring> getAllHirings();
-    Hiring getHiringById(int idHiring);
-    List<Hiring> getHiringsByIdReader(int idReader);
-    List<Hiring> getHiringsByIdBook(int idBook);
+    Hiring getHiringById(Hiring hiring);
+    List<Hiring> getHiringsByIdReader(Hiring hiring);
+    List<Hiring> getHiringsByIdBook(Hiring hiring);
     boolean updateHiring(Hiring hiring);
     boolean deleteHiring(Hiring hiring);
     boolean addHiring(Hiring hiring);

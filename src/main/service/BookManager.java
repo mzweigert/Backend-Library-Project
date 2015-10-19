@@ -103,12 +103,12 @@ public class BookManager implements BookDAO
     }
 
     @Override
-    public Book getBookById(int idBook)
+    public Book getBookById(Book book)
     {
-        Book book;
+
         try
         {
-            getBookByIdStmt.setInt(1, idBook);
+            getBookByIdStmt.setInt(1, book.getIdBook());
             ResultSet rs = getBookByIdStmt.executeQuery();
 
             while (rs.next())
@@ -127,13 +127,13 @@ public class BookManager implements BookDAO
     }
 
     @Override
-    public List<Book> getBookByTitle(String title)
+    public List<Book> getBookByTitle(Book book)
     {
         List<Book> booksByTitle = new ArrayList<Book>();
-        Book book;
+
         try
         {
-            getBookByTitleStmt.setString(1, title);
+            getBookByTitleStmt.setString(1, book.getTitle());
             ResultSet rs = getBookByTitleStmt.executeQuery();
 
             while (rs.next())

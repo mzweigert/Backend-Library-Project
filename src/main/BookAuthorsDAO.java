@@ -2,6 +2,7 @@ package main;
 
 
 import main.domain.Author;
+import main.domain.Book;
 import main.domain.BookAuthors;
 
 import java.util.List;
@@ -14,11 +15,11 @@ public interface BookAuthorsDAO
 
 
     List<BookAuthors> getAllBookAuthors();
-    List<BookAuthors> getBookAuthorsByIdAuthor(int idAuthor);
-    List<BookAuthors> getBookAuthorsByIdBook(int idBook);
-    BookAuthors getBookAuthors(int idAuthor, int idBook);
+    List<BookAuthors> getBookAuthorsByIdAuthor(BookAuthors bookAuthors);
+    List<BookAuthors> getBookAuthorsByIdBook(BookAuthors bookAuthors);
+    BookAuthors getBookAuthors(BookAuthors bookAuthors);
 
-    int updateBookAuthors(BookAuthors bookAuthors, int idAuthor, int idBook);
+    int updateBookAuthors(BookAuthors bookAuthors);
     int deleteBookAuthors(BookAuthors bookAuthors);
 
     int addBookAuthors(BookAuthors bookAuthors);

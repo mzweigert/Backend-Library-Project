@@ -29,11 +29,12 @@ CREATE TABLE  Author (
   name VARCHAR(70) NOT NULL,
   surname VARCHAR(30) NOT NULL
 );
-CREATE TABLE  BookAuthors (
+CREATE TABLE BookAuthors
+(
+	idBookAuthors INTEGER NOT NULL identity(1,1) PRIMARY KEY,
+	idAuthor INTEGER FOREIGN KEY REFERENCES Author(idAuthor) ,
+    idBook INTEGER FOREIGN KEY REFERENCES Book(idBook)                                                         
 
-  idAuthor INTEGER NOT NULL REFERENCES Author(idAuthor),
-  idBook INTEGER NOT NULL REFERENCES Book(idBook),
-	Primary Key (idAuthor, idBook)
 );
 
 CREATE TABLE  Hiring (
