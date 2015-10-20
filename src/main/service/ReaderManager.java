@@ -57,8 +57,8 @@ public class ReaderManager implements ReaderDAO
 
             getAllReadersStmt = connection.prepareStatement("SELECT idReader, name, surname, join_date, extra_points FROM Reader");
             getReaderByIdStmt = connection.prepareStatement("SELECT * FROM Reader WHERE idReader = ?");
-            getReaderBySurnameStmt = connection.prepareStatement("SELECT * FROM Reader WHERE surname='?' ");
-            updateReaderStmt = connection.prepareStatement("UPDATE Reader SET name='?', surname='?', join_date = '?', extra_points = ? WHERE idReader = ?");
+            getReaderBySurnameStmt = connection.prepareStatement("SELECT * FROM Reader WHERE surname = ? ");
+            updateReaderStmt = connection.prepareStatement("UPDATE Reader SET name = ?, surname = ?, join_date = ? , extra_points = ? WHERE idReader = ?");
             deleteReaderStmt = connection.prepareStatement("DELETE Reader WHERE idReader = ?");
             addReaderStmt = connection.prepareStatement("INSERT INTO Reader (name, surname, join_date, extra_points) VALUES (?, ?, ?, ?)");
             deleteAllReadersStmt = connection.prepareStatement("DELETE FROM Reader");
