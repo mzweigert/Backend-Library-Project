@@ -85,6 +85,7 @@ public class BooksAuthorsManagerTest
     {
 
         assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1);
+        assertEquals(authorManager.addAuthor(new Author("Lolek", "Lolkowski")) , 1);
         assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1);
         assertEquals(bookManager.addBook(new Book("Nawet ok", Date.valueOf("2015-03-03"), 12)), 1);
 
@@ -98,13 +99,16 @@ public class BooksAuthorsManagerTest
         booksAuthors = booksAuthorsManager.getAllBooksAuthors().get(0); // pobieramy rekord z tabeli BookAuthor
 
         booksAuthors.setIdBook(bookManager.getAllBooks().get(1).getIdBook()); // tutaj zmieniamy idBook z id ksiazki Taka Sobie na idBook Nawet ok
+        booksAuthors.setIdAuthor(authorManager.getAllAuthors().get(1).getIdAuthor());
 
-        //UPDATE'ujemy rekord "Marny koles" i "Taka Sobie" przypisujac mu ksiazke "Nawet ok"
+
+        //UPDATE'ujemy rekord "Marny koles" i "Taka Sobie" przypisujac mu ksiazke "Nawet ok" i autora Lolek Lolkowski
         assertEquals(booksAuthorsManager.updateBooksAuthors(booksAuthors), 1);
 
         booksAuthors = booksAuthorsManager.getAllBooksAuthors().get(0); // pobieramy rekord w celu weryfikacji
         assertNotEquals(book.getIdBook(), booksAuthors.getIdBook()); // sprawdzamy czy idBook pobranego wiersza jest takie samo jak
                                                                     // idBook ksi¹zki Nawet ok
+        assertNotEquals(author.getIdAuthor(), booksAuthors.getIdAuthor());// a tu sprawdzamy idAuthora
 
     }
 

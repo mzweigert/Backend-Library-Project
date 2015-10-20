@@ -104,6 +104,8 @@ public class HiringManagerTest
         assertEquals(bookManager.addBook(new Book("Spoko", Date.valueOf("2015-01-01"), 234)) , 1);
 
         assertEquals(readerManager.addReader(new Reader("Andrzej", "Koles", Date.valueOf("2015-10-20"), 2000)) , 1);
+        assertEquals(readerManager.addReader(new Reader("Mateusz", "Zweigert", Date.valueOf("2015-10-20"), 2000)) , 1);
+
 
         book = bookManager.getAllBooks().get(0);
         reader = readerManager.getAllReaders().get(0);
@@ -115,19 +117,23 @@ public class HiringManagerTest
         hiring = hiringManager.getAllHirings().get(0);
         // poki co nasz rekord zapisany w hiring ma pole idBook ksi¹zki o tytule "Taka sobie".
         //Zmienmy mu zatem idKsiazki "Kiepska"
-
+        // idAuthora obecnie to Andrzej koles, zmienmy mu na autora Mateusz Zweigert
         int idBook = bookManager.getAllBooks().get(1).getIdBook();
+        int idReader = readerManager.getAllReaders().get(1).getIdReader();
         hiring.setIdBook(idBook);
+        hiring.setIdReader(idReader);
+        //DATE WYPOZYCZENIA TEZ ZMIENMY
+        hiring.setHireDate(Date.valueOf("2002-02-02"));
+
         // Update'ujemy hiring ze zmienionym idBook
         assertEquals(hiringManager.updateHiring(hiring), 1);
         //sprawdzamy czy idBook rekordu bezposrednio pobranego z bazy jest roowne idBook ksiazki "Kiepska"
         assertEquals(hiringManager.getAllHirings().get(0).getIdBook(), idBook);
+        //sprawdzamy czy idReader rekordu bezposrednio pobranego z bazy jest roowne idReader czytelnika "Mateusz Zweigert"
+        assertEquals(hiringManager.getAllHirings().get(0).getIdReader(), idReader);
 
-        // mozemy tez update'owac date wypozyczenia
-        hiring.setHireDate(Date.valueOf("2002-01-01"));
-        assertEquals(hiringManager.updateHiring(hiring), 1);
-        //sprawdzamy czy data wypozyczenia sie zmienila
-        assertEquals(hiringManager.getAllHirings().get(0).getHireDate(), Date.valueOf("2002-01-01"));
+
+        assertEquals(hiringManager.getAllHirings().get(0).getHireDate(), Date.valueOf("2002-02-02"));
     }
 
     @Test

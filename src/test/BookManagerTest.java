@@ -57,10 +57,12 @@ public class BookManagerTest
         book = bookManager.getAllBooks().get(0);
         book.setTitle("1984");
         book.setRelaseDate(Date.valueOf("1949-06-08"));
+        book.setRelase(5);
 
         assertEquals(bookManager.updateBook(book), 1);
         assertEquals(bookManager.getAllBooks().get(0).getTitle(), "1984");
         assertEquals(bookManager.getAllBooks().get(0).getRelaseDate(), Date.valueOf("1949-06-08"));
+        assertEquals(bookManager.getAllBooks().get(0).getRelase(), 5);
 
     }
 

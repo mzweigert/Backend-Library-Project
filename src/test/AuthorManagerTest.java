@@ -53,6 +53,7 @@ public class AuthorManagerTest
         authorManager.addAuthor(new Author("Mateusz", "Maklowicz"));
         author = authorManager.getAllAuthors().get(0);
         author.setName("Robert");
+        author.setSurname("Maklowiczowski");
 
         assertEquals(authorManager.updateAuthor(author), 1);
         assertEquals(authorManager.getAllAuthors().get(0).getName(), author.getName());
