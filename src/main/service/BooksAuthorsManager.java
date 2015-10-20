@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.BooksAuthorsDAO;
+import main.domain.Author;
+import main.domain.Book;
 import main.domain.BooksAuthors;
 
 public class BooksAuthorsManager implements BooksAuthorsDAO
@@ -107,13 +109,13 @@ public class BooksAuthorsManager implements BooksAuthorsDAO
     }
 
     @Override
-    public List<BooksAuthors>  getBooksAuthorsByIdAuthor(BooksAuthors booksAuthors)
+    public List<BooksAuthors>  getBooksAuthorsByIdAuthor(Author author)
     {
         List<BooksAuthors> booksAuthorsByIdAuthor = new ArrayList<BooksAuthors>();
-
+        BooksAuthors booksAuthors;
         try
         {
-            getBooksAuthorsByIdAuthorStmt.setInt(1, booksAuthors.getIdAuthor());
+            getBooksAuthorsByIdAuthorStmt.setInt(1, author.getIdAuthor());
             ResultSet rs = getBooksAuthorsByIdAuthorStmt.executeQuery();
 
             while (rs.next())
@@ -134,13 +136,13 @@ public class BooksAuthorsManager implements BooksAuthorsDAO
     }
 
     @Override
-    public List<BooksAuthors> getBooksAuthorsByIdBook(BooksAuthors booksAuthors)
+    public List<BooksAuthors> getBooksAuthorsByIdBook(Book book)
     {
         List<BooksAuthors> booksAuthorsByIdBook = new ArrayList<BooksAuthors>();
-
+        BooksAuthors booksAuthors;
         try
         {
-            getBooksAuthorsByIdBookStmt.setInt(1, booksAuthors.getIdBook());
+            getBooksAuthorsByIdBookStmt.setInt(1, book.getIdBook());
             ResultSet rs = getBooksAuthorsByIdBookStmt.executeQuery();
 
             while (rs.next())

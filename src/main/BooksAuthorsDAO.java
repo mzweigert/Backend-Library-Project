@@ -15,8 +15,8 @@ public interface BooksAuthorsDAO
 
 
     List<BooksAuthors> getAllBooksAuthors();
-    List<BooksAuthors> getBooksAuthorsByIdAuthor(BooksAuthors booksAuthors);
-    List<BooksAuthors> getBooksAuthorsByIdBook(BooksAuthors booksAuthors);
+    List<BooksAuthors> getBooksAuthorsByIdAuthor(Author author);
+    List<BooksAuthors> getBooksAuthorsByIdBook(Book book);
     BooksAuthors getBooksAuthorsById(BooksAuthors booksAuthors);
     int updateBooksAuthors(BooksAuthors booksAuthors);
     int deleteBooksAuthors(BooksAuthors booksAuthors);

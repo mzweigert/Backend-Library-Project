@@ -12,7 +12,10 @@ import java.util.List;
 
 import main.HiringDAO;
 import main.domain.Author;
+import main.domain.Book;
 import main.domain.Hiring;
+import main.domain.Reader;
+import org.junit.Before;
 
 public class HiringManager implements HiringDAO
 {
@@ -64,7 +67,7 @@ public class HiringManager implements HiringDAO
             getHiringByIdStmt = connection.prepareStatement("SELECT * FROM Hiring WHERE idHiring = ?");
             getHiringsByIdBookStmt = connection.prepareStatement("SELECT * FROM Hiring WHERE idBook = ?");
             getHiringsByIdReaderStmt = connection.prepareStatement("SELECT * FROM Hiring WHERE idReader = ?");
-            updateHiringStmt = connection.prepareStatement("UPDATE Hiring SET idBook=?, idReader=?, hire_date WHERE idHiring = ?");
+            updateHiringStmt = connection.prepareStatement("UPDATE Hiring SET idBook=?, idReader=?, hire_date=? WHERE idHiring = ?");
             deleteHiringStmt = connection.prepareStatement("DELETE Hiring WHERE idHiring = ?");
             addHiringStmt = connection.prepareStatement("INSERT INTO Hiring (idBook, idReader, hire_date) VALUES (?, ?, ?)");
             deleteAllHiringsStmt = connection.prepareStatement("DELETE FROM Hiring");
@@ -76,7 +79,7 @@ public class HiringManager implements HiringDAO
         }
     }
 
-    Connection getConnection()
+    public Connection getConnection()
     {
         return connection;
     }
@@ -128,12 +131,13 @@ public class HiringManager implements HiringDAO
     }
 
     @Override
-    public List<Hiring> getHiringsByIdReader(Hiring hiring)
+    public List<Hiring> getHiringsByIdReader(Reader reader)
     {
+        Hiring hiring;
         List<Hiring> hiringsByIdReader = new ArrayList<Hiring>();
         try
         {
-            getHiringsByIdReaderStmt.setInt(1, hiring.getIdReader());
+            getHiringsByIdReaderStmt.setInt(1, reader.getIdReader());
             ResultSet rs = getHiringsByIdReaderStmt.executeQuery();
 
             while (rs.next())
@@ -154,12 +158,13 @@ public class HiringManager implements HiringDAO
     }
 
     @Override
-    public List<Hiring> getHiringsByIdBook(Hiring hiring)
+    public List<Hiring> getHiringsByIdBook(Book book)
     {
         List<Hiring> hiringsByIdBook = new ArrayList<Hiring>();
+        Hiring hiring;
         try
         {
-            getHiringsByIdBookStmt.setInt(1, hiring.getIdBook());
+            getHiringsByIdBookStmt.setInt(1, book.getIdBook());
             ResultSet rs = getHiringsByIdBookStmt.executeQuery();
 
             while (rs.next())
@@ -180,44 +185,48 @@ public class HiringManager implements HiringDAO
     }
 
     @Override
-    public boolean updateHiring(Hiring hiring)
+    public int updateHiring(Hiring hiring)
     {
+        int count = 0;
         try
         {
             updateHiringStmt.setInt(1, hiring.getIdBook());
             updateHiringStmt.setInt(2, hiring.getIdReader());
             updateHiringStmt.setDate(3, hiring.getHireDate());
 
-            updateHiringStmt.executeUpdate();
-            return true;
+            updateHiringStmt.setInt(4, hiring.getIdHiring());
+
+            count = updateHiringStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
 
     @Override
-    public boolean deleteHiring(Hiring hiring)
+    public int deleteHiring(Hiring hiring)
     {
+        int count = 0;
         try
         {
-            deleteAllHiringsStmt.setInt(1, hiring.getIdHiring());
-            deleteAllHiringsStmt.executeUpdate();
-            return true;
+            deleteHiringStmt.setInt(1, hiring.getIdHiring());
+            count = deleteHiringStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return false;
+        return count;
     }
 
-    public boolean addHiring(Hiring hiring)
+    public int addHiring(Hiring hiring)
     {
-
+        int count = 0;
         try
         {
             addHiringStmt.setInt(1, hiring.getIdBook());
@@ -225,17 +234,17 @@ public class HiringManager implements HiringDAO
             addHiringStmt.setDate(3, hiring.getHireDate());
 
 
-            addHiringStmt.executeUpdate();
-            return true;
+           count = addHiringStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
 
-    void clearHirings()
+    public void clearHirings()
     {
         try
         {

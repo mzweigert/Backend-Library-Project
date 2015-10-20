@@ -43,10 +43,6 @@ public class BooksAuthorsManagerTest
     @Test
     public void checkAddingBooksAuthors()
     {
-        booksAuthorsManager.clearBooksAuthors();
-
-        authorManager.clearAuthors();
-        bookManager.clearBooks();
 
         assertEquals(authorManager.addAuthor(new Author("Mateusz", "Wajcheprzeloz")) , 1);
         assertEquals(bookManager.addBook(new Book("Fajna", Date.valueOf("2015-01-01"), 1)) , 1);
@@ -69,10 +65,6 @@ public class BooksAuthorsManagerTest
     @Test
     public void checkDeletingBooksAuthors()
     {
-        booksAuthorsManager.clearBooksAuthors();
-
-        authorManager.clearAuthors();
-        bookManager.clearBooks();
 
         assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1);
         assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1);
@@ -91,9 +83,6 @@ public class BooksAuthorsManagerTest
     @Test
     public void checkUpdatingBooksAuthors()
     {
-        booksAuthorsManager.clearBooksAuthors();
-        authorManager.clearAuthors();
-        bookManager.clearBooks();
 
         assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1);
         assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1);
@@ -122,10 +111,6 @@ public class BooksAuthorsManagerTest
     @Test
     public void checkGettingBooksAuthorsById()
     {
-        booksAuthorsManager.clearBooksAuthors();
-        authorManager.clearAuthors();
-        bookManager.clearBooks();
-
         assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1); //Sprawdzamy czy Autor poprawnie siê dodaje
         assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1); //Sprawdzamy czy Ksi¹zka poprawnie siê dodaje
         int idAuthor = authorManager.getAllAuthors().get(0).getIdAuthor();
@@ -150,9 +135,6 @@ public class BooksAuthorsManagerTest
     @Test
     public void checkGettingBooksAuthorsByIdAuthor()
     {
-        booksAuthorsManager.clearBooksAuthors();
-        authorManager.clearAuthors();
-        bookManager.clearBooks();
 
         assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1);
         assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1);
@@ -162,22 +144,19 @@ public class BooksAuthorsManagerTest
 
 
         //pobranie idAuthor z 1 rekordu z tabeli Author ktory bedzie przypisany do 4 ksiazek w tabeli BooksAuthors
-        int idAuthor = authorManager.getAllAuthors().get(0).getIdAuthor();
+        author = authorManager.getAllAuthors().get(0);
 
 
         //TWORZENIE NOWYCH REKORDOW Z AUTOREM Marny Koles i Przypisywanie do niego wszystkich 4 ksiazek
         for(int i=0;i<4; i++)
-            booksAuthorsManager.addBooksAuthors(new BooksAuthors(idAuthor, bookManager.getAllBooks().get(i).getIdBook()));
+            booksAuthorsManager.addBooksAuthors(new BooksAuthors(author.getIdAuthor(), bookManager.getAllBooks().get(i).getIdBook()));
 
-
-        booksAuthors = new BooksAuthors();
-        booksAuthors.setIdAuthor(idAuthor);
 
         //Sprawdzamy czy ilosc wierszy jest rowna 4 (tyle ile przypisalismy ksiazek do Marnego Kolesia)
-        assertEquals(booksAuthorsManager.getBooksAuthorsByIdAuthor(booksAuthors).size(), 4);
+        assertEquals(booksAuthorsManager.getBooksAuthorsByIdAuthor(author).size(), 4);
 
         //Sprawdzamy czy idAuthor z obiektu author jest takie same jak idAuthor rekordu pobranego z bazy
-        assertEquals(booksAuthorsManager.getAllBooksAuthors().get(0).getIdAuthor(), idAuthor);
+        assertEquals(booksAuthorsManager.getAllBooksAuthors().get(0).getIdAuthor(), author.getIdAuthor());
 
 
 
@@ -196,21 +175,19 @@ public class BooksAuthorsManagerTest
 
         assertEquals(bookManager.addBook(new Book("Spoko Ksiazka", Date.valueOf("2015-01-01"), 1)) , 1);
 
-        int idBook = bookManager.getAllBooks().get(0).getIdBook();
+        book = bookManager.getAllBooks().get(0);
 
 
-        //TWORZENIE NOWYCH REKORDOW Z KSIAZKA "Spoko Ksiazka" i Przypisywanie do niej wszystkich 5 ksiazek
+        //TWORZENIE NOWYCH REKORDOW Z KSIAZKA "Spoko Ksiazka" i Przypisywanie do niej wszystkich 5 Autorow
         for(int i=0;i<5; i++)
-            booksAuthorsManager.addBooksAuthors(new BooksAuthors(authorManager.getAllAuthors().get(i).getIdAuthor(), idBook));
+            booksAuthorsManager.addBooksAuthors(new BooksAuthors(authorManager.getAllAuthors().get(i).getIdAuthor(), book.getIdBook()));
 
         //Sprawdzamy czy ilosc wierszy jest rowna 5 (tyle ile przypisalismy autorow do jednej SpokoKsiazki)
+        assertEquals(booksAuthorsManager.getBooksAuthorsByIdBook(book).size(), 5);
 
-        booksAuthors = new BooksAuthors();
-        booksAuthors.setIdBook(idBook);
-        assertEquals(booksAuthorsManager.getBooksAuthorsByIdBook(booksAuthors).size(), 5);
 
         //Sprawdzamy czy idBook  jest takie same jak idBook rekordu pobranego z bazy
-        assertEquals(booksAuthorsManager.getAllBooksAuthors().get(0).getIdBook(), idBook);
+        assertEquals(booksAuthorsManager.getAllBooksAuthors().get(0).getIdBook(), book.getIdBook());
 
     }
 

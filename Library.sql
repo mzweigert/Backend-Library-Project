@@ -1,4 +1,8 @@
-
+drop table Hiring;
+drop table booksAuthors;
+drop table Reader;
+drop table Book;
+drop table Author;
 
 
 CREATE TABLE  Reader (
@@ -29,9 +33,9 @@ CREATE TABLE  Author (
   name VARCHAR(70) NOT NULL,
   surname VARCHAR(30) NOT NULL
 );
-CREATE TABLE BookAuthors
+CREATE TABLE BooksAuthors
 (
-	idBookAuthors INTEGER NOT NULL identity(1,1) PRIMARY KEY,
+	idBooksAuthors INTEGER NOT NULL identity(1,1) PRIMARY KEY,
 	idAuthor INTEGER FOREIGN KEY REFERENCES Author(idAuthor) ,
     idBook INTEGER FOREIGN KEY REFERENCES Book(idBook)                                                         
 

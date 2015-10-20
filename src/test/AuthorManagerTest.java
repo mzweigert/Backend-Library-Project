@@ -82,15 +82,15 @@ public class AuthorManagerTest
     public void checkGettingAuthorById()
     {
 
-        Author authorFromDataBase;
+        Author authorFromDataBaseById;
         authorManager.addAuthor(new Author("Mariusz", "Buzianocnik"));
         author = authorManager.getAllAuthors().get(0);
 
-        authorFromDataBase = authorManager.getAuthorById(author/* ID AUTHOR FROM COLLECTION LIST */);
+        authorFromDataBaseById = authorManager.getAuthorById(author);
 
-        assertEquals(author.getIdAuthor(), authorFromDataBase.getIdAuthor());
-        assertEquals(author.getName(), authorFromDataBase.getName());
-        assertEquals(author.getSurname(), authorFromDataBase.getSurname());
+        assertEquals(author.getIdAuthor(), authorFromDataBaseById.getIdAuthor());
+        assertEquals(author.getName(), authorFromDataBaseById.getName());
+        assertEquals(author.getSurname(), authorFromDataBaseById.getSurname());
     }
 
 

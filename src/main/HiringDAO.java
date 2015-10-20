@@ -1,6 +1,9 @@
 package main;
 
+import main.domain.Book;
 import main.domain.Hiring;
+import main.domain.Reader;
+import org.junit.Before;
 
 import java.util.List;
 
@@ -11,10 +14,10 @@ public interface HiringDAO
 {
     List<Hiring> getAllHirings();
     Hiring getHiringById(Hiring hiring);
-    List<Hiring> getHiringsByIdReader(Hiring hiring);
-    List<Hiring> getHiringsByIdBook(Hiring hiring);
-    boolean updateHiring(Hiring hiring);
-    boolean deleteHiring(Hiring hiring);
-    boolean addHiring(Hiring hiring);
+    List<Hiring> getHiringsByIdReader(Reader reader);
+    List<Hiring> getHiringsByIdBook(Book book);
+    int updateHiring(Hiring hiring);
+    int deleteHiring(Hiring hiring);
+    int addHiring(Hiring hiring);
 
 }

@@ -72,7 +72,7 @@ public class ReaderManager implements ReaderDAO
 
     }
 
-    Connection getConnection()
+    public Connection getConnection()
     {
         return connection;
     }
@@ -151,8 +151,9 @@ public class ReaderManager implements ReaderDAO
     }
 
     @Override
-    public boolean updateReader(Reader reader)
+    public int updateReader(Reader reader)
     {
+        int count = 0;
         try
         {
             updateReaderStmt.setString(1, reader.getName());
@@ -161,36 +162,36 @@ public class ReaderManager implements ReaderDAO
             updateReaderStmt.setInt(4, reader.getExtraPoints());
             updateReaderStmt.setInt(5, reader.getIdReader());
 
-            updateReaderStmt.executeUpdate();
-            return true;
+            count = updateReaderStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
 
     @Override
-    public boolean deleteReader(Reader reader)
+    public int deleteReader(Reader reader)
     {
+        int count = 0;
         try
         {
             deleteReaderStmt.setInt(1, reader.getIdReader());
-            deleteReaderStmt.executeUpdate();
-            return true;
+            count = deleteReaderStmt.executeUpdate();
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return false;
+        return count;
     }
 
-    public boolean addReader(Reader Reader)
+    public int addReader(Reader Reader)
     {
-
+        int count = 0;
         try
         {
             addReaderStmt.setString(1, Reader.getName());
@@ -198,17 +199,17 @@ public class ReaderManager implements ReaderDAO
             addReaderStmt.setDate(3, Reader.getJoinDate());
             addReaderStmt.setInt(4, Reader.getExtraPoints());
 
-            addReaderStmt.executeUpdate();
-            return  true;
+            count = addReaderStmt.executeUpdate();
+
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return false;
+        return count;
     }
 
-    void clearReaders()
+    public void clearReaders()
     {
         try
         {
