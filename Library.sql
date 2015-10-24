@@ -1,5 +1,5 @@
 drop table Hiring;
-drop table booksAuthors;
+drop table BooksAuthors;
 drop table Reader;
 drop table Book;
 drop table Author;

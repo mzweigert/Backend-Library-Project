@@ -1,11 +1,13 @@
 package main.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Author implements Serializable
 {
     private int idAuthor;
     private String name, surname;
+    private List<Book> books = null;
 
     public Author()
     {
@@ -47,4 +49,13 @@ public class Author implements Serializable
     {
         this.idAuthor = idAuthor;
     }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
 }

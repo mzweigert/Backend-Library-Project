@@ -1,7 +1,7 @@
 package test;
 
-import main.domain.Book;
-import main.service.BookManager;
+import main.domain.*;
+import main.service.*;
 import org.junit.After;
 
 import org.junit.Assert;
@@ -21,6 +21,10 @@ import static org.junit.Assert.assertNotNull;
 public class BookManagerTest
 {
     BookManager bookManager = new BookManager();
+    AuthorManager authorManager = new AuthorManager();
+    ReaderManager readerManager = new ReaderManager();
+    HiringManager hiringManager = new HiringManager();
+    BooksAuthorsManager booksAuthorsManager = new BooksAuthorsManager();
     Book book;
 
 
@@ -113,6 +117,8 @@ public class BookManagerTest
     @After
     public void clearAll()
     {
+        hiringManager.clearHirings();
+        booksAuthorsManager.clearBooksAuthors();
         bookManager.clearBooks();
     }
 }

@@ -2,6 +2,7 @@ package main.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class Reader implements Serializable
 {
@@ -9,6 +10,7 @@ public class Reader implements Serializable
 	private String name,surname;
 	private java.sql.Date joinDate;
 	private int extraPoints;
+	private List<Book> books;
 
 	public Reader()
 	{
@@ -63,5 +65,12 @@ public class Reader implements Serializable
 	public void setIdReader(int idReader) {
 		this.idReader = idReader;
 	}
-    
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 }

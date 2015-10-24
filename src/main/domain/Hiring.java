@@ -10,6 +10,10 @@ public class Hiring implements Serializable
     private int idBook, idReader;
     private Date hireDate;
 
+    public Hiring()
+    {
+
+    }
 
     public Hiring(int idBook, int idReader, Date hireDate)
     {

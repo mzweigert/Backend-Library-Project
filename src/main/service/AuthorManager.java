@@ -12,6 +12,7 @@ import java.util.List;
 
 import main.AuthorDAO;
 import main.domain.Author;
+import main.domain.Book;
 
 public class AuthorManager implements AuthorDAO
 {
@@ -150,6 +151,7 @@ public class AuthorManager implements AuthorDAO
 
         return null;
     }
+
     public int updateAuthor(Author author)
     {
         int count = 0;

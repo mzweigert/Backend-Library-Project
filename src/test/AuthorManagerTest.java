@@ -1,12 +1,17 @@
 package test;
 
 import main.domain.Author;
+import main.domain.Book;
+import main.domain.BooksAuthors;
 import main.service.AuthorManager;
 
+import main.service.BookManager;
+import main.service.BooksAuthorsManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +22,12 @@ import static org.junit.Assert.*;
 public class AuthorManagerTest
 {
     AuthorManager authorManager = new AuthorManager();
-    Author author;
 
+    BookManager bookManager = new BookManager();
+    BooksAuthorsManager booksAuthorsManager = new BooksAuthorsManager();
+
+    BooksAuthors booksAuthors;
+    Author author;
 
     @Test
     public void checkConnection()
@@ -35,16 +44,18 @@ public class AuthorManagerTest
     @Test
     public void checkAddingAuthor()
     {
-
-        assertEquals(authorManager.addAuthor(new Author("Andrzej", "Strzelba")), 1);
+        author = new Author("Andrzej", "Strzelba");
+        assertEquals(authorManager.addAuthor(author), 1);
+        assertEquals(authorManager.getAllAuthors().size(), 1);
     }
     @Test
     public void checkDeletingAuthor()
     {
-
-        authorManager.addAuthor(new Author("Mateusz", "Strzelba"));
+        author = new Author("Mateusz", "Strzelba");
+        authorManager.addAuthor(author);
         author = authorManager.getAllAuthors().get(0);
         assertEquals(authorManager.deleteAuthor(author) , 1);
+        assertFalse(authorManager.getAllAuthors().contains(author));
 
     }
     @Test
@@ -94,8 +105,7 @@ public class AuthorManagerTest
         assertEquals(author.getSurname(), authorFromDataBaseById.getSurname());
     }
 
-
-    @After
+    @Before
     public void clearAll()
     {
         authorManager.clearAuthors();

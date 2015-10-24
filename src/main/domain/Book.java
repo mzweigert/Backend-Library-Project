@@ -2,6 +2,7 @@ package main.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class Book implements Serializable
 {
@@ -10,6 +11,8 @@ public class Book implements Serializable
 	private String title;
 	private Date relaseDate;
 	private int relase;
+	private List<Reader> readers;
+	private List<Author> authors;
 
 	public Book()
 	{
@@ -53,6 +56,22 @@ public class Book implements Serializable
 
 	public void setIdBook(int idBook) {
 		this.idBook = idBook;
+	}
+
+	public List<Reader> getReaders() {
+		return readers;
+	}
+
+	public void setReaders(List<Reader> readers) {
+		this.readers = readers;
+	}
+
+	public List<Author> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
 	}
 
 

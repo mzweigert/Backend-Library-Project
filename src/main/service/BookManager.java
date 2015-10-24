@@ -13,6 +13,7 @@ import java.util.List;
 import main.BookDAO;
 import main.domain.Author;
 import main.domain.Book;
+import main.domain.Reader;
 
 public class BookManager implements BookDAO
 {
@@ -29,6 +30,7 @@ public class BookManager implements BookDAO
     private PreparedStatement updateBookStmt;
     private PreparedStatement deleteBookStmt;
     private PreparedStatement addBookStmt;
+
 
     private PreparedStatement deleteAllBooksStmt;
 
@@ -152,6 +154,7 @@ public class BookManager implements BookDAO
 
         return null;
     }
+
 
     @Override
     public int updateBook(Book book)

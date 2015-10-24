@@ -12,6 +12,7 @@ import java.util.List;
 
 import main.ReaderDAO;
 import main.domain.Reader;
+import main.domain.Book;
 
 public class ReaderManager implements ReaderDAO
 {
@@ -30,7 +31,6 @@ public class ReaderManager implements ReaderDAO
 
     private PreparedStatement addReaderStmt;
     private PreparedStatement deleteAllReadersStmt;
-
 
     private Statement statement;
 
@@ -61,7 +61,9 @@ public class ReaderManager implements ReaderDAO
             updateReaderStmt = connection.prepareStatement("UPDATE Reader SET name = ?, surname = ?, join_date = ? , extra_points = ? WHERE idReader = ?");
             deleteReaderStmt = connection.prepareStatement("DELETE Reader WHERE idReader = ?");
             addReaderStmt = connection.prepareStatement("INSERT INTO Reader (name, surname, join_date, extra_points) VALUES (?, ?, ?, ?)");
+
             deleteAllReadersStmt = connection.prepareStatement("DELETE FROM Reader");
+
 
 
         }

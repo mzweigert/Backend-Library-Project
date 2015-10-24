@@ -1,6 +1,7 @@
 package main;
 
 import main.domain.Author;
+import main.domain.Book;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public interface AuthorDAO
     List<Author> getAllAuthors();
     Author getAuthorById(Author author);
     List<Author> getAuthorBySurname(Author author);
+
     int updateAuthor(Author author);
     int deleteAuthor(Author author);
     int addAuthor(Author author);

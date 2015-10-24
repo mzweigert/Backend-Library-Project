@@ -1,6 +1,10 @@
 package test;
 
+import main.domain.Book;
+import main.domain.Hiring;
 import main.domain.Reader;
+import main.service.BookManager;
+import main.service.HiringManager;
 import main.service.ReaderManager;
 
 import org.junit.After;
@@ -17,6 +21,8 @@ import static org.junit.Assert.*;
 public class ReaderManagerTest
 {
     ReaderManager readerManager = new ReaderManager();
+    BookManager bookManager = new BookManager();
+    HiringManager hiringManager = new HiringManager();
     Reader reader;
 
 
@@ -29,6 +35,7 @@ public class ReaderManagerTest
     public void checkClearingReaders()
     {
 
+        readerManager.clearReaders();
         assertEquals(readerManager.getAllReaders().size(), 0);
     }
 
@@ -37,6 +44,7 @@ public class ReaderManagerTest
     {
 
         assertEquals(readerManager.addReader(new Reader("Andrzej", "Strzelba", Date.valueOf("2013-05-21"), 200)), 1);
+        assertEquals(readerManager.getAllReaders().size(), 1);
     }
     @Test
     public void checkDeletingReader()
@@ -65,6 +73,7 @@ public class ReaderManagerTest
         assertEquals(readerManager.getAllReaders().get(0).getExtraPoints(), 100);
 
     }
+
 
     @Test
     public void checkGettingReaderBySurname()
@@ -106,6 +115,7 @@ public class ReaderManagerTest
     @After
     public void clearAll()
     {
+
         readerManager.clearReaders();
     }
 }
