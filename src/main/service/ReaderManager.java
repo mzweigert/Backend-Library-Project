@@ -28,8 +28,8 @@ public class ReaderManager implements ReaderDAO
     private PreparedStatement getReaderBySurnameStmt;
     private PreparedStatement updateReaderStmt;
     private PreparedStatement deleteReaderStmt;
-
     private PreparedStatement addReaderStmt;
+    private PreparedStatement getReaderBooksStmt;
     private PreparedStatement deleteAllReadersStmt;
 
     private Statement statement;
@@ -61,6 +61,8 @@ public class ReaderManager implements ReaderDAO
             updateReaderStmt = connection.prepareStatement("UPDATE Reader SET name = ?, surname = ?, join_date = ? , extra_points = ? WHERE idReader = ?");
             deleteReaderStmt = connection.prepareStatement("DELETE Reader WHERE idReader = ?");
             addReaderStmt = connection.prepareStatement("INSERT INTO Reader (name, surname, join_date, extra_points) VALUES (?, ?, ?, ?)");
+            getReaderBooksStmt = connection.prepareStatement("Select Book.idBook, Book.title, Book.relase_date, Book.relase from Book " +
+                                                             "inner join Hiring on Book.idBook=Hiring.idBook where Hiring.idReader = ?");
 
             deleteAllReadersStmt = connection.prepareStatement("DELETE FROM Reader");
 
@@ -101,7 +103,6 @@ public class ReaderManager implements ReaderDAO
         return readers;
     }
 
-    @Override
     public Reader getReaderById(Reader reader)
     {
 
@@ -143,6 +144,32 @@ public class ReaderManager implements ReaderDAO
             }
 
             return readersBySurname;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    @Override
+    public  List<Book> getReaderBooks(Reader reader)
+    {
+        List<Book> readerBooks = new ArrayList<Book>();
+        Book book;
+        try
+        {
+            getReaderBooksStmt.setInt(1, reader.getIdReader());
+            ResultSet rs = getReaderBooksStmt.executeQuery();
+
+            while (rs.next())
+            {
+                book = new Book(rs.getString("title"), rs.getDate("relase_date"), rs.getInt("relase"));
+                book.setIdBook(rs.getInt("idBook"));
+                readerBooks.add(book);
+            }
+
+            return readerBooks;
         }
         catch (SQLException e)
         {

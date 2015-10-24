@@ -1,5 +1,6 @@
 package main;
 
+import main.domain.Book;
 import main.domain.Reader;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public interface ReaderDAO
     List<Reader> getAllReaders();
     Reader getReaderById(Reader reader);
     List<Reader> getReadersBySurname(Reader reader);
+    List<Book> getReaderBooks(Reader reader);
     int updateReader(Reader reader);
     int deleteReader(Reader reader);
     int addReader(Reader reader);

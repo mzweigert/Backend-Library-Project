@@ -74,6 +74,69 @@ public class ReaderManagerTest
 
     }
 
+    @Test
+    public void checkGettingReaderBooks()
+    {
+        Hiring hiring = new Hiring();
+
+        readerManager.addReader(new Reader("Spejson", "Miêsnie", Date.valueOf("2011-01-01"), 100));
+        readerManager.addReader(new Reader("Walo", "Mozg", Date.valueOf("2011-01-01"), 100));
+
+        bookManager.addBook(new Book("Tytus Romek i ten trzeci", Date.valueOf("2000-01-01"), 1));
+        bookManager.addBook(new Book("Blok Ekipa", Date.valueOf("2000-01-01"), 1));
+        bookManager.addBook(new Book("Pan Tadeusz", Date.valueOf("2000-05-06"), 155));
+        bookManager.addBook(new Book("Dziady", Date.valueOf("2004-05-04"), 152));
+        bookManager.addBook(new Book("Aloes i inne rzeczy", Date.valueOf("2015-05-06"), 15));
+        bookManager.addBook(new Book("Powstanie styczniowe", Date.valueOf("2015-05-06"), 15));
+
+
+        //Dodawanie rekordow do tabeli Hiring
+        hiring.setHireDate(Date.valueOf("2015-02-01"));
+        hiring.setIdReader(readerManager.getAllReaders().get(0).getIdReader());
+        for(int i = 0; i< 5; i++)
+        {
+            hiring.setIdBook(bookManager.getAllBooks().get(i).getIdBook());
+            hiringManager.addHiring(hiring);
+        }
+
+        ///tu dodawanie rekordow dla drugiego Czytelnika Walo Mozg
+        hiring.setIdReader(readerManager.getAllReaders().get(1).getIdReader());
+        for(int i = 5; i>1; i--)
+        {
+            hiring.setIdBook(bookManager.getAllBooks().get(i).getIdBook());
+            hiringManager.addHiring(hiring);
+        }
+
+        // TESTOWANIE GLOWNE
+        int idBookFromGettingReaderBooks,
+                idBookFromGetHiringsByIdReader;
+
+        reader = readerManager.getAllReaders().get(0);
+        //Testowanie polega na sprawdzaniu czy idBook pobranych ksiazek przypisanych do czytelnika z funkcji getReaderBooks
+        // jest jest takie samo jak idBook pobranych bezposrednio z tabeli Hiring
+        for(int i = 0 ; i<hiringManager.getHiringsByIdReader(reader).size() ; i++)
+        {
+            idBookFromGettingReaderBooks = readerManager.getReaderBooks(reader).get(i).getIdBook();
+            idBookFromGetHiringsByIdReader= hiringManager.getHiringsByIdReader(reader).get(i).getIdBook();
+            assertEquals(idBookFromGettingReaderBooks, idBookFromGetHiringsByIdReader);
+        }
+        assertEquals(readerManager.getReaderBooks(reader).size(), 5);
+
+
+        //DLA DRUGIEGO CZYTELNIKA
+        reader = readerManager.getAllReaders().get(1);
+        for(int i = 0 ; i<hiringManager.getHiringsByIdReader(reader).size() ; i++)
+        {
+            idBookFromGettingReaderBooks = readerManager.getReaderBooks(reader).get(i).getIdBook();
+            idBookFromGetHiringsByIdReader= hiringManager.getHiringsByIdReader(reader).get(i).getIdBook();
+            assertEquals(idBookFromGettingReaderBooks, idBookFromGetHiringsByIdReader);
+        }
+        assertEquals(readerManager.getReaderBooks(reader).size(), 4);
+
+        hiringManager.clearHirings();
+
+
+    }
 
     @Test
     public void checkGettingReaderBySurname()
