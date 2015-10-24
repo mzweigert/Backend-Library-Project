@@ -71,6 +71,67 @@ public class AuthorManagerTest
     }
 
     @Test
+    public void checkGettingAuthorBooks()
+    {
+
+        booksAuthors = new BooksAuthors();
+
+        authorManager.addAuthor(new Author("Mateusz", "Strzelba"));
+        authorManager.addAuthor(new Author("Witek", "Witkowski"));
+
+        bookManager.addBook(new Book("Tytus Romek i ten trzeci", Date.valueOf("2000-01-01"), 1));
+        bookManager.addBook(new Book("fajna", Date.valueOf("2000-01-01"), 1));
+        bookManager.addBook(new Book("nie fajna", Date.valueOf("2000-01-01"), 1));
+        bookManager.addBook(new Book("slaba", Date.valueOf("2000-01-01"), 1));
+        bookManager.addBook(new Book("srednia", Date.valueOf("2000-01-01"), 1));
+
+
+        //Dodawanie wierszy do tabeli BookAuthors
+        booksAuthors.setIdAuthor(authorManager.getAllAuthors().get(0).getIdAuthor());
+        booksAuthors.setIdBook(bookManager.getAllBooks().get(0).getIdBook());
+        booksAuthorsManager.addBooksAuthors(booksAuthors);
+        booksAuthors.setIdBook(bookManager.getAllBooks().get(1).getIdBook());
+        booksAuthorsManager.addBooksAuthors(booksAuthors);
+        booksAuthors.setIdBook(bookManager.getAllBooks().get(2).getIdBook());
+        booksAuthorsManager.addBooksAuthors(booksAuthors);
+        booksAuthors.setIdAuthor(authorManager.getAllAuthors().get(1).getIdAuthor());
+        booksAuthors.setIdBook(bookManager.getAllBooks().get(2).getIdBook());
+        booksAuthorsManager.addBooksAuthors(booksAuthors);
+        booksAuthors.setIdBook(bookManager.getAllBooks().get(3).getIdBook());
+        booksAuthorsManager.addBooksAuthors(booksAuthors);
+        booksAuthors.setIdBook(bookManager.getAllBooks().get(4).getIdBook());
+        booksAuthorsManager.addBooksAuthors(booksAuthors);
+
+
+        // TESTOWANIE GLOWNE
+        int idBookFromGetBooksAuthor,
+                idBookFromGetBooksAuthorsByIdAuthor;
+
+        author = authorManager.getAllAuthors().get(0);
+        //Testowanie polega na sprawdzaniu czy idBook pobranych ksi¹zek danego autora z funkcji GetBooksAuthor jest taka sama jak pobranych bezposrednio z tabeli BookAuthors dla danego autora
+        for(int i = 0 ; i<booksAuthorsManager.getBooksAuthorsByIdAuthor(author).size() ; i++)
+        {
+            idBookFromGetBooksAuthor = authorManager.getBooksAuthor(author).get(i).getIdBook();
+            idBookFromGetBooksAuthorsByIdAuthor= booksAuthorsManager.getBooksAuthorsByIdAuthor(author).get(i).getIdBook();
+            assertEquals(idBookFromGetBooksAuthor, idBookFromGetBooksAuthorsByIdAuthor);
+        }
+        assertEquals(authorManager.getBooksAuthor(author).size(), 3);
+
+
+        //DLA DRUGIEGO AUTORA
+        author = authorManager.getAllAuthors().get(1);
+        for(int i = 0 ; i<booksAuthorsManager.getBooksAuthorsByIdAuthor(author).size() ; i++)
+        {
+            idBookFromGetBooksAuthor = authorManager.getBooksAuthor(author).get(i).getIdBook();
+            idBookFromGetBooksAuthorsByIdAuthor= booksAuthorsManager.getBooksAuthorsByIdAuthor(author).get(i).getIdBook();
+            assertEquals(idBookFromGetBooksAuthor, idBookFromGetBooksAuthorsByIdAuthor);
+        }
+        assertEquals(authorManager.getBooksAuthor(author).size(), 3);
+
+        booksAuthorsManager.clearBooksAuthors();
+
+    }
+    @Test
     public void checkGettingAuthorBySurname()
     {
         List<Author> authors = new ArrayList<Author>();

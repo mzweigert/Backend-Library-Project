@@ -30,7 +30,7 @@ public class AuthorManager implements AuthorDAO
     private PreparedStatement updateAuthorStmt;
     private PreparedStatement deleteAuthorStmt;
     private PreparedStatement addAuthorStmt;
-
+    private PreparedStatement getAuthorBooksStmt;
     private PreparedStatement deleteAllAuthorsStmt;
 
 
@@ -65,7 +65,9 @@ public class AuthorManager implements AuthorDAO
             updateAuthorStmt = connection.prepareStatement("UPDATE Author SET name=?, surname=? WHERE idAuthor = ?");
             deleteAuthorStmt = connection.prepareStatement("DELETE Author WHERE idAuthor = ?");
             addAuthorStmt = connection.prepareStatement("INSERT INTO Author (name, surname) VALUES (?, ?)");
-
+            getAuthorBooksStmt = connection.prepareStatement("Select Book.idBook, Book.title, Book.relase_date, Book.relase from Book "+
+                                                             "inner join BooksAuthors on Book.idBook = BooksAuthors.idBook "+
+                                                             "where BooksAuthors.idAuthor = ? ;");
             deleteAllAuthorsStmt = connection.prepareStatement("DELETE FROM Author");
 
         }
@@ -104,6 +106,33 @@ public class AuthorManager implements AuthorDAO
         }
 
     }
+    @Override
+    public  List<Book> getBooksAuthor(Author author)
+    {
+        List<Book> booksAuthor = new ArrayList<Book>();
+        Book book;
+        try
+        {
+            getAuthorBooksStmt.setInt(1, author.getIdAuthor());
+            ResultSet rs = getAuthorBooksStmt.executeQuery();
+
+            while (rs.next())
+            {
+                book = new Book(rs.getString("title"), rs.getDate("relase_date"), rs.getInt("relase"));
+                book.setIdBook(rs.getInt("idBook"));
+                booksAuthor.add(book);
+            }
+
+            return booksAuthor;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public Author getAuthorById(Author author)
     {
 
