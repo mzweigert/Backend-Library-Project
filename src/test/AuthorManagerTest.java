@@ -111,22 +111,22 @@ public class AuthorManagerTest
         //Testowanie polega na sprawdzaniu czy idBook pobranych ksi¹zek danego autora z funkcji GetBooksAuthor jest taka sama jak pobranych bezposrednio z tabeli BookAuthors dla danego autora
         for(int i = 0 ; i<booksAuthorsManager.getBooksAuthorsByIdAuthor(author).size() ; i++)
         {
-            idBookFromGetBooksAuthor = authorManager.getBooksAuthor(author).get(i).getIdBook();
+            idBookFromGetBooksAuthor = authorManager.getAuthorBooks(author).get(i).getIdBook();
             idBookFromGetBooksAuthorsByIdAuthor= booksAuthorsManager.getBooksAuthorsByIdAuthor(author).get(i).getIdBook();
             assertEquals(idBookFromGetBooksAuthor, idBookFromGetBooksAuthorsByIdAuthor);
         }
-        assertEquals(authorManager.getBooksAuthor(author).size(), 3);
+        assertEquals(authorManager.getAuthorBooks(author).size(), 3);
 
 
         //DLA DRUGIEGO AUTORA
         author = authorManager.getAllAuthors().get(1);
         for(int i = 0 ; i<booksAuthorsManager.getBooksAuthorsByIdAuthor(author).size() ; i++)
         {
-            idBookFromGetBooksAuthor = authorManager.getBooksAuthor(author).get(i).getIdBook();
+            idBookFromGetBooksAuthor = authorManager.getAuthorBooks(author).get(i).getIdBook();
             idBookFromGetBooksAuthorsByIdAuthor= booksAuthorsManager.getBooksAuthorsByIdAuthor(author).get(i).getIdBook();
             assertEquals(idBookFromGetBooksAuthor, idBookFromGetBooksAuthorsByIdAuthor);
         }
-        assertEquals(authorManager.getBooksAuthor(author).size(), 3);
+        assertEquals(authorManager.getAuthorBooks(author).size(), 3);
 
         booksAuthorsManager.clearBooksAuthors();
 

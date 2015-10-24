@@ -15,7 +15,8 @@ public interface BookDAO
     List<Book> getAllBooks();
     Book getBookById(Book book);
     List<Book> getBookByTitle(Book book);
-
+    List<Author> getBookAuthors(Book book);
+    List<Reader> getBookReaders(Book book);
     int updateBook(Book book);
     int deleteBook(Book book);
     int addBook(Book book);

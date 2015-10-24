@@ -30,7 +30,8 @@ public class BookManager implements BookDAO
     private PreparedStatement updateBookStmt;
     private PreparedStatement deleteBookStmt;
     private PreparedStatement addBookStmt;
-
+    private PreparedStatement getBookAuthorsStmt;
+    private PreparedStatement getBookReadersStmt;
 
     private PreparedStatement deleteAllBooksStmt;
 
@@ -63,6 +64,12 @@ public class BookManager implements BookDAO
             updateBookStmt = connection.prepareStatement("UPDATE Book SET title = ?, relase_date = ?, relase = ? ");
             deleteBookStmt = connection.prepareStatement("DELETE Book WHERE idBook = ? ");
             addBookStmt = connection.prepareStatement("INSERT INTO Book (title, relase_date, relase) VALUES (?, ?, ?)");
+            getBookAuthorsStmt = connection.prepareStatement("Select Author.idAuthor, Author.name, Author.surname from Author "+
+                                                             "inner join BooksAuthors on Author.idAuthor=BooksAuthors.idAuthor Where BooksAuthors.idBook = ?;");
+
+            getBookReadersStmt = connection.prepareStatement("Select Reader.idReader, Reader.name, Reader.surname, Reader.join_date, Reader.extra_points from Reader "+
+                                                             "inner join Hiring on Reader.idReader = Hiring.idReader where Hiring.idBook = ? ;");
+
 
             deleteAllBooksStmt = connection.prepareStatement("DELETE FROM Book");
 
@@ -103,7 +110,58 @@ public class BookManager implements BookDAO
         }
         return books;
     }
+    @Override
+    public List<Author> getBookAuthors(Book book)
+    {
+        List<Author> authorsBook = new ArrayList<Author>();
+        Author author;
+        try
+        {
+            getBookAuthorsStmt.setInt(1, book.getIdBook());
+            ResultSet rs = getBookAuthorsStmt.executeQuery();
 
+            while (rs.next())
+            {
+                author = new Author(rs.getString("name"), rs.getString("surname"));
+                author.setIdAuthor(rs.getInt("idAuthor"));
+                authorsBook.add(author);
+            }
+
+            return authorsBook;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    @Override
+    public List<Reader> getBookReaders(Book book)
+    {
+        List<Reader> bookReaders = new ArrayList<Reader>();
+        Reader reader;
+        try
+        {
+            getBookReadersStmt.setInt(1, book.getIdBook());
+            ResultSet rs = getBookReadersStmt.executeQuery();
+
+            while (rs.next())
+            {
+                reader = new Reader(rs.getString("name"), rs.getString("surname"), rs.getDate("join_date"), rs.getInt("extra_points"));
+                reader.setIdReader(rs.getInt("idReader"));
+                bookReaders.add(reader);
+            }
+
+            return bookReaders;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
     @Override
     public Book getBookById(Book book)
     {

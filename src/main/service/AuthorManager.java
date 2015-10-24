@@ -107,7 +107,7 @@ public class AuthorManager implements AuthorDAO
 
     }
     @Override
-    public  List<Book> getBooksAuthor(Author author)
+    public  List<Book> getAuthorBooks(Author author)
     {
         List<Book> booksAuthor = new ArrayList<Book>();
         Book book;
