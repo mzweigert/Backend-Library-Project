@@ -11,8 +11,6 @@ CREATE TABLE  Reader (
   surname VARCHAR(25) NOT NULL,
   join_date date NOT NULL,
   extra_points integer default 0
-
- 
  ) ;
 CREATE TABLE  Book (
 
