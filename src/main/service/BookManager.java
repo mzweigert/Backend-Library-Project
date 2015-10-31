@@ -61,7 +61,7 @@ public class BookManager implements BookDAO
             getAllBooksStmt = connection.prepareStatement("SELECT idBook, title, relase_date, relase FROM Book");
             getBookByIdStmt = connection.prepareStatement("SELECT * FROM Book WHERE idBook = ?");
             getBookByTitleStmt = connection.prepareStatement("SELECT * FROM Book WHERE title = ?");
-            updateBookStmt = connection.prepareStatement("UPDATE Book SET title = ?, relase_date = ?, relase = ? ");
+            updateBookStmt = connection.prepareStatement("UPDATE Book SET title = ?, relase_date = ?, relase = ? WHERE idBook = ?");
             deleteBookStmt = connection.prepareStatement("DELETE Book WHERE idBook = ? ");
             addBookStmt = connection.prepareStatement("INSERT INTO Book (title, relase_date, relase) VALUES (?, ?, ?)");
             getBookAuthorsStmt = connection.prepareStatement("Select Author.idAuthor, Author.name, Author.surname from Author "+
@@ -223,6 +223,7 @@ public class BookManager implements BookDAO
             updateBookStmt.setString(1, book.getTitle());
             updateBookStmt.setDate(2, book.getRelaseDate());
             updateBookStmt.setInt(3, book.getRelase());
+            updateBookStmt.setInt(4, book.getIdBook());
 
             count = updateBookStmt.executeUpdate();
 
