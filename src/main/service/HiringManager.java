@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.HiringDAO;
-import main.domain.Author;
 import main.domain.Book;
 import main.domain.Hiring;
 import main.domain.Reader;
-import org.junit.Before;
+
 
 public class HiringManager implements HiringDAO
 {

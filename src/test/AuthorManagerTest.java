@@ -7,7 +7,6 @@ import main.service.AuthorManager;
 
 import main.service.BookManager;
 import main.service.BooksAuthorsManager;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -108,7 +107,7 @@ public class AuthorManagerTest
                 idBookFromGetBooksAuthorsByIdAuthor;
 
         author = authorManager.getAllAuthors().get(0);
-        //Testowanie polega na sprawdzaniu czy idBook pobranych ksi¹zek danego autora z funkcji GetBooksAuthor jest taka sama jak pobranych bezposrednio z tabeli BookAuthors dla danego autora
+        //Testowanie polega na sprawdzaniu czy idBook pobranych ksiï¿½zek danego autora z funkcji GetBooksAuthor jest taka sama jak pobranych bezposrednio z tabeli BookAuthors dla danego autora
         for(int i = 0 ; i<booksAuthorsManager.getBooksAuthorsByIdAuthor(author).size() ; i++)
         {
             idBookFromGetBooksAuthor = authorManager.getAuthorBooks(author).get(i).getIdBook();
@@ -135,7 +134,7 @@ public class AuthorManagerTest
     public void checkGettingAuthorBySurname()
     {
         List<Author> authors = new ArrayList<Author>();
-        Author author = new Author("Siwy", "Lewy"); // Obiekt author bêdzie mial zapisane surname jako LEWY/ tym sie posluzymy do wydobycia autorow z nazwiskiem LEWY
+        Author author = new Author("Siwy", "Lewy"); // Obiekt author bï¿½dzie mial zapisane surname jako LEWY/ tym sie posluzymy do wydobycia autorow z nazwiskiem LEWY
         authorManager.addAuthor(author);
         authorManager.addAuthor(new Author("Czarny", "Lewy"));
         authorManager.addAuthor(new Author("Czerwony", "Lewy"));

@@ -1,0 +1,1 @@
+javac -cp C:\Users\Mateusz\Desktop\IdeaProjects\Backend-Library-Project\libraries\junit-4.12.jar -d C:\Users\Mateusz\Desktop\IdeaProjects\Backend-Library-Project\build\ main\domain\*.java main\*.java main\service\*.java test\*.java
