@@ -1,5 +1,9 @@
-package main.service;
+package com.library.service;
 
+
+import com.library.AuthorDAO;
+import com.library.domain.Author;
+import com.library.domain.Book;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,16 +14,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.AuthorDAO;
-import main.domain.Author;
-import main.domain.Book;
+
 
 public class AuthorManager implements AuthorDAO
 {
 
     private Connection connection;
 
-    private String url = "jdbc:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
+    private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
 
     private String createTableAuthor = "CREATE TABLE  Author (idAuthor INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1), name VARCHAR(70) NOT NULL, surname VARCHAR(30) NOT NULL);";
 
@@ -80,6 +82,7 @@ public class AuthorManager implements AuthorDAO
     {
         return connection;
     }
+    @Override
     public List<Author> getAllAuthors()
     {
         List<Author> authors = new ArrayList<Author>();
@@ -132,7 +135,7 @@ public class AuthorManager implements AuthorDAO
 
         return null;
     }
-
+    @Override
     public Author getAuthorById(Author author)
     {
 
@@ -155,6 +158,7 @@ public class AuthorManager implements AuthorDAO
 
         return null;
     }
+    @Override
     public List<Author> getAuthorBySurname(Author author)
     {
         List<Author> authorsBySurname = new ArrayList<Author>();
@@ -180,7 +184,7 @@ public class AuthorManager implements AuthorDAO
 
         return null;
     }
-
+    @Override
     public int updateAuthor(Author author)
     {
         int count = 0;
@@ -199,6 +203,7 @@ public class AuthorManager implements AuthorDAO
         }
         return count;
     }
+    @Override
     public int deleteAuthor(Author author)
     {
         int count = 0;
@@ -215,6 +220,7 @@ public class AuthorManager implements AuthorDAO
 
         return count;
     }
+    @Override
     public int addAuthor(Author author)
     {
         int count = 0;

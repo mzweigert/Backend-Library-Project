@@ -1,13 +1,14 @@
-package test;
+package com.library;
 
-import main.domain.Author;
-import main.domain.Book;
-import main.domain.BooksAuthors;
-import main.service.AuthorManager;
+import com.library.domain.Author;
+import com.library.domain.Book;
+import com.library.domain.BooksAuthors;
+import com.library.service.AuthorManager;
 
-import main.service.BooksAuthorsManager;
-import main.service.BookManager;
+import com.library.service.BooksAuthorsManager;
+import com.library.service.BookManager;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Date;
@@ -107,7 +108,7 @@ public class BooksAuthorsManagerTest
 
         booksAuthors = booksAuthorsManager.getAllBooksAuthors().get(0); // pobieramy rekord w celu weryfikacji
         assertNotEquals(book.getIdBook(), booksAuthors.getIdBook()); // sprawdzamy czy idBook pobranego wiersza jest takie samo jak
-                                                                    // idBook ksi¹zki Nawet ok
+                                                                    // idBook ksiazki Nawet ok
         assertNotEquals(author.getIdAuthor(), booksAuthors.getIdAuthor());// a tu sprawdzamy idAuthora
 
     }
@@ -115,8 +116,8 @@ public class BooksAuthorsManagerTest
     @Test
     public void checkGettingBooksAuthorsById()
     {
-        assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1); //Sprawdzamy czy Autor poprawnie siê dodaje
-        assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1); //Sprawdzamy czy Ksi¹zka poprawnie siê dodaje
+        assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1); //Sprawdzamy czy Autor poprawnie sie dodaje
+        assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1); //Sprawdzamy czy Ksi?zka poprawnie sie dodaje
         int idAuthor = authorManager.getAllAuthors().get(0).getIdAuthor();
         int idBook  = bookManager.getAllBooks().get(0).getIdBook();
 
@@ -196,7 +197,7 @@ public class BooksAuthorsManagerTest
     }
 
 
-    @After
+    @Before
     public void clearAll()
     {
         booksAuthorsManager.clearBooksAuthors();
@@ -205,3 +206,4 @@ public class BooksAuthorsManagerTest
     }
 
 }
+

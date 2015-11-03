@@ -1,7 +1,7 @@
-package main;
+package com.library;
 
-import main.domain.Author;
-import main.domain.Book;
+import com.library.domain.Author;
+import com.library.domain.Book;
 
 import java.util.List;
 

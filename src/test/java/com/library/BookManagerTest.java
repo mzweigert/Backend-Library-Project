@@ -1,17 +1,19 @@
-package test;
+package com.library;
 
-import main.domain.*;
-import main.service.*;
+
+import com.library.domain.*;
+import com.library.service.*;
 import org.junit.After;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+
 
 /**
  * Created by MATEUSZ on 2015-10-19.
@@ -142,7 +144,7 @@ public class BookManagerTest
         readerManager.addReader(new Reader("Witek", "Witkowski", Date.valueOf("2011-01-01"), 100));
         readerManager.addReader(new Reader("Wojtek", "Smieszek", Date.valueOf("2011-01-01"), 100));
         readerManager.addReader(new Reader("Kasia", "Kasikowska", Date.valueOf("2011-01-01"), 100));
-        readerManager.addReader(new Reader("Spejson", "Miêsnie", Date.valueOf("2011-01-01"), 100));
+        readerManager.addReader(new Reader("Spejson", "Miesnie", Date.valueOf("2011-01-01"), 100));
         readerManager.addReader(new Reader("Walo", "Mozg", Date.valueOf("2011-01-01"), 100));
         readerManager.addReader(new Reader("Wojtas", "Polonez", Date.valueOf("2011-01-01"), 100));
 
@@ -236,7 +238,7 @@ public class BookManagerTest
     }
 
 
-    @After
+    @Before
     public void clearAll()
     {
         hiringManager.clearHirings();
@@ -244,3 +246,4 @@ public class BookManagerTest
         bookManager.clearBooks();
     }
 }
+

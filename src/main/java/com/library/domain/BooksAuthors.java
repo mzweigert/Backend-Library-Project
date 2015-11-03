@@ -1,4 +1,4 @@
-package main.domain;
+package com.library.domain;
 
 /**
  * Created by MATEUSZ on 2015-10-19.

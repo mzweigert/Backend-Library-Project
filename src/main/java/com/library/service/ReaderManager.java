@@ -1,5 +1,10 @@
-package main.service;
+package com.library.service;
 
+
+
+import com.library.ReaderDAO;
+import com.library.domain.Book;
+import com.library.domain.Reader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,16 +15,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.ReaderDAO;
-import main.domain.Reader;
-import main.domain.Book;
+
 
 public class ReaderManager implements ReaderDAO
 {
 
     private Connection connection;
 
-    private String url = "jdbc:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
+    private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
 
     private String createTableReader = "CREATE TABLE  Reader (idReader INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1), name VARCHAR(25) NOT NULL, surname VARCHAR(25) NOT NULL, join_date date NOT NULL, extra_points integer default 0);";
     private PreparedStatement getAllReadersStmt;
@@ -79,6 +82,8 @@ public class ReaderManager implements ReaderDAO
     {
         return connection;
     }
+
+    @Override
     public List<Reader> getAllReaders()
     {
         List<Reader> readers = new ArrayList<Reader>();
@@ -101,7 +106,7 @@ public class ReaderManager implements ReaderDAO
         }
         return readers;
     }
-
+    @Override
     public Reader getReaderById(Reader reader)
     {
 
@@ -216,7 +221,7 @@ public class ReaderManager implements ReaderDAO
 
         return count;
     }
-
+    @Override
     public int addReader(Reader Reader)
     {
         int count = 0;

@@ -1,5 +1,11 @@
-package main.service;
+package com.library.service;
 
+
+
+import com.library.BooksAuthorsDAO;
+import com.library.domain.Author;
+import com.library.domain.Book;
+import com.library.domain.BooksAuthors;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,17 +16,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.BooksAuthorsDAO;
-import main.domain.Author;
-import main.domain.Book;
-import main.domain.BooksAuthors;
 
 public class BooksAuthorsManager implements BooksAuthorsDAO
 {
 
     private Connection connection;
 
-    private String url = "jdbc:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
+    private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
 
     private String createTableBooksAuthors= "CREATE TABLE BooksAuthors( " +
             "idBooksAuthors INTEGER NOT NULL identity(1,1) PRIMARY KEY, " +
@@ -84,7 +86,7 @@ public class BooksAuthorsManager implements BooksAuthorsDAO
     }
 
 
-
+    @Override
     public List<BooksAuthors> getAllBooksAuthors()
     {
         List<BooksAuthors> booksAuthors = new ArrayList<BooksAuthors>();
@@ -221,6 +223,7 @@ public class BooksAuthorsManager implements BooksAuthorsDAO
         }
         return count;
     }
+    @Override
     public int addBooksAuthors(BooksAuthors booksAuthors)
     {
         int count = 0;

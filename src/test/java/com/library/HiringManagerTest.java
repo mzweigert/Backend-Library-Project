@@ -1,15 +1,16 @@
-package test;
+package com.library;
 
 
-import main.domain.Book;
-import main.domain.Reader;
-import main.domain.Hiring;
-import main.service.BookManager;
+import com.library.domain.Book;
+import com.library.domain.Reader;
+import com.library.domain.Hiring;
+import com.library.service.BookManager;
 
-import main.service.HiringManager;
+import com.library.service.HiringManager;
 
-import main.service.ReaderManager;
+import com.library.service.ReaderManager;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Date;
@@ -115,7 +116,7 @@ public class HiringManagerTest
 
         //pobieramy rekord ktoremu chcemy cos zmienic
         hiring = hiringManager.getAllHirings().get(0);
-        // poki co nasz rekord zapisany w hiring ma pole idBook ksi¹zki o tytule "Taka sobie".
+        // poki co nasz rekord zapisany w hiring ma pole idBook ksi?zki o tytule "Taka sobie".
         //Zmienmy mu zatem idKsiazki "Kiepska"
         // idAuthora obecnie to Andrzej koles, zmienmy mu na autora Mateusz Zweigert
         int idBook = bookManager.getAllBooks().get(1).getIdBook();
@@ -234,7 +235,7 @@ public class HiringManagerTest
     }
 
 
-    @After
+    @Before
     public void clearAll()
     {
         hiringManager.clearHirings();
@@ -243,3 +244,4 @@ public class HiringManagerTest
     }
 
 }
+

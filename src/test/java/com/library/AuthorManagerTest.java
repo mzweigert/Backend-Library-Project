@@ -1,12 +1,11 @@
-package test;
+package com.library;
 
-import main.domain.Author;
-import main.domain.Book;
-import main.domain.BooksAuthors;
-import main.service.AuthorManager;
-
-import main.service.BookManager;
-import main.service.BooksAuthorsManager;
+import com.library.domain.Author;
+import com.library.domain.Book;
+import com.library.domain.BooksAuthors;
+import com.library.service.AuthorManager;
+import com.library.service.BookManager;
+import com.library.service.BooksAuthorsManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,6 +32,7 @@ public class AuthorManagerTest
     {
         assertNotNull(authorManager.getConnection());
     }
+
     @Test
     public void checkClearingAuthors()
     {
@@ -168,6 +168,7 @@ public class AuthorManagerTest
     @Before
     public void clearAll()
     {
+        booksAuthorsManager.clearBooksAuthors();
         authorManager.clearAuthors();
     }
 }

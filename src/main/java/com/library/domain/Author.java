@@ -1,4 +1,4 @@
-package main.domain;
+package com.library.domain;
 
 import java.io.Serializable;
 import java.util.List;

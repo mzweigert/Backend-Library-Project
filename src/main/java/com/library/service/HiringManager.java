@@ -1,5 +1,11 @@
-package main.service;
+package com.library.service;
 
+
+
+import com.library.HiringDAO;
+import com.library.domain.Book;
+import com.library.domain.Hiring;
+import com.library.domain.Reader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,10 +16,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.HiringDAO;
-import main.domain.Book;
-import main.domain.Hiring;
-import main.domain.Reader;
 
 
 public class HiringManager implements HiringDAO
@@ -21,7 +23,7 @@ public class HiringManager implements HiringDAO
 
     private Connection connection;
 
-    private String url = "jdbc:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
+    private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
 
     private String createTableHiring = "CREATE TABLE  Hiring (idHiring INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY , idBook INTEGER NOT NULL REFERENCES Book(idBook), idReader INTEGER NOT NULL REFERENCES Reader(idReader), hire_date DATE NOT NULL );";
 
@@ -79,6 +81,7 @@ public class HiringManager implements HiringDAO
     {
         return connection;
     }
+    @Override
     public List<Hiring> getAllHirings()
     {
         List<Hiring> hirings = new ArrayList<Hiring>();
@@ -219,7 +222,7 @@ public class HiringManager implements HiringDAO
 
         return count;
     }
-
+    @Override
     public int addHiring(Hiring hiring)
     {
         int count = 0;

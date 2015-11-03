@@ -1,13 +1,14 @@
-package test;
+package com.library;
 
-import main.domain.Book;
-import main.domain.Hiring;
-import main.domain.Reader;
-import main.service.BookManager;
-import main.service.HiringManager;
-import main.service.ReaderManager;
+import com.library.domain.Book;
+import com.library.domain.Hiring;
+import com.library.domain.Reader;
+import com.library.service.BookManager;
+import com.library.service.HiringManager;
+import com.library.service.ReaderManager;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Date;
@@ -79,7 +80,7 @@ public class ReaderManagerTest
     {
         Hiring hiring = new Hiring();
 
-        readerManager.addReader(new Reader("Spejson", "Miêsnie", Date.valueOf("2011-01-01"), 100));
+        readerManager.addReader(new Reader("Spejson", "Miesnie", Date.valueOf("2011-01-01"), 100));
         readerManager.addReader(new Reader("Walo", "Mozg", Date.valueOf("2011-01-01"), 100));
 
         bookManager.addBook(new Book("Tytus Romek i ten trzeci", Date.valueOf("2000-01-01"), 1));
@@ -142,7 +143,7 @@ public class ReaderManagerTest
     public void checkGettingReaderBySurname()
     {
         List<Reader> readers = new ArrayList<Reader>();
-        reader = new Reader("Schabowy", "Kotlet", Date.valueOf("2005-09-09"), 1); // Obiekt Reader bêdzie mial zapisane surname jako LEWY/ tym sie posluzymy do wydobycia autorow z nazwiskiem LEWY
+        reader = new Reader("Schabowy", "Kotlet", Date.valueOf("2005-09-09"), 1); // Obiekt Reader bedzie mial zapisane surname jako LEWY/ tym sie posluzymy do wydobycia autorow z nazwiskiem LEWY
         readerManager.addReader(reader);
 
         readerManager.addReader(new Reader("Meielony", "Kotlet", Date.valueOf("2005-09-09"), 1));
@@ -175,10 +176,12 @@ public class ReaderManagerTest
     }
 
 
-    @After
+    @Before
     public void clearAll()
     {
-
+        hiringManager.clearHirings();
         readerManager.clearReaders();
     }
 }
+
+

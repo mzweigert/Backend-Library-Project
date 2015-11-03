@@ -1,8 +1,9 @@
-package main;
+package com.library;
 
-import main.domain.Book;
-import main.domain.Hiring;
-import main.domain.Reader;
+
+import com.library.domain.Book;
+import com.library.domain.Hiring;
+import com.library.domain.Reader;
 
 import java.util.List;
 

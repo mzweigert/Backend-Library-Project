@@ -1,5 +1,11 @@
-package main.service;
+package com.library.service;
 
+
+
+import com.library.BookDAO;
+import com.library.domain.Author;
+import com.library.domain.Book;
+import com.library.domain.Reader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,17 +16,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.BookDAO;
-import main.domain.Author;
-import main.domain.Book;
-import main.domain.Reader;
 
 public class BookManager implements BookDAO
 {
 
     private Connection connection;
 
-    private String url = "jdbc:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
+    private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=mzweigert" + ";user=mzweigert" + ";password=224667";
 
     private String createTableBook = "CREATE TABLE  Book ( idBook INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1), title VARCHAR(70) NOT NULL, relase_date Date not null, relase VARCHAR(15) not null);";
 
@@ -87,7 +89,7 @@ public class BookManager implements BookDAO
     }
 
 
-
+    @Override
     public List<Book> getAllBooks()
     {
         List<Book> books = new ArrayList<Book>();
@@ -253,7 +255,7 @@ public class BookManager implements BookDAO
 
         return count;
     }
-
+    @Override
     public int addBook(Book Book)
     {
         int count = 0;
