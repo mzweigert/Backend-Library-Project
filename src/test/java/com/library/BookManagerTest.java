@@ -49,8 +49,10 @@ public class BookManagerTest
     {
 
         bookManager.addBook(new Book("Ksiazeczka fajna bardzo", Date.valueOf("2011-01-02"), 122));
+        bookManager.addBook(new Book("Ksiazeczka fajna bardzo", Date.valueOf("2011-01-02"), 122));
         book = bookManager.getAllBooks().get(0);
         assertEquals(bookManager.deleteBook(book) , 1);
+        assertEquals(bookManager.getAllBooks().size(), 1);
 
     }
     @Test

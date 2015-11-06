@@ -50,12 +50,13 @@ public class ReaderManagerTest
     @Test
     public void checkDeletingReader()
     {
-
+		readerManager.addReader(new Reader("Mateusz", "Maklowicz", Date.valueOf("2015-06-14"), 1500));
         assertEquals(readerManager.addReader(new Reader("Mateusz", "Strzelba", Date.valueOf("2001-01-02"),111)), 1);;
         reader = readerManager.getAllReaders().get(0);
-        assertEquals(readerManager.getAllReaders().size(), 1);
+        assertEquals(readerManager.getAllReaders().size(), 2);
+        
         assertEquals(readerManager.deleteReader(reader) , 1);
-        assertEquals(readerManager.getAllReaders().size(), 0);
+        assertEquals(readerManager.getAllReaders().size(), 1);
 
     }
     @Test

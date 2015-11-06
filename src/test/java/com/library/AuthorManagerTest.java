@@ -52,9 +52,12 @@ public class AuthorManagerTest
     {
         author = new Author("Mateusz", "Strzelba");
         authorManager.addAuthor(author);
+        author = new Author("Andrzej", "Strzelba");
+        authorManager.addAuthor(author);
+        
         author = authorManager.getAllAuthors().get(0);
         assertEquals(authorManager.deleteAuthor(author) , 1);
-        assertFalse(authorManager.getAllAuthors().contains(author));
+        assertEquals(authorManager.getAllAuthors().size() , 1);
 
     }
     @Test

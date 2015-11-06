@@ -47,8 +47,7 @@ public class BooksAuthorsManagerTest
 
         assertEquals(authorManager.addAuthor(new Author("Mateusz", "Wajcheprzeloz")) , 1);
         assertEquals(bookManager.addBook(new Book("Fajna", Date.valueOf("2015-01-01"), 1)) , 1);
-
-
+		
 
         author = authorManager.getAllAuthors().get(0);
         book = bookManager.getAllBooks().get(0);
@@ -69,16 +68,27 @@ public class BooksAuthorsManagerTest
 
         assertEquals(authorManager.addAuthor(new Author("Marny", "Koles")) , 1);
         assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1);
+		assertEquals(authorManager.addAuthor(new Author("Mateusz", "Wajcheprzeloz")) , 1);
+        assertEquals(bookManager.addBook(new Book("Fajna", Date.valueOf("2015-01-01"), 1)) , 1);
+
 
 
         author = authorManager.getAllAuthors().get(0);
         book = bookManager.getAllBooks().get(0);
         booksAuthors = new BooksAuthors(author.getIdAuthor(), book.getIdBook());
         booksAuthorsManager.addBooksAuthors(booksAuthors);
-
+		author = authorManager.getAllAuthors().get(1);
+        book = bookManager.getAllBooks().get(1);
+        booksAuthors = new BooksAuthors(author.getIdAuthor(), book.getIdBook());
+        booksAuthorsManager.addBooksAuthors(booksAuthors);
+        
+        
+        
         booksAuthors = booksAuthorsManager.getAllBooksAuthors().get(0); // pobieramy znowu rekord w celu wydobycia idBooksAuthors ktorego wygenerowala baza danych
 
         assertEquals(booksAuthorsManager.deleteBooksAuthors(booksAuthors), 1);
+        
+        assertEquals(booksAuthorsManager.getAllBooksAuthors().size(), 1);
 
     }
     @Test

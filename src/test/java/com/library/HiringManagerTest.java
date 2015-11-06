@@ -73,16 +73,28 @@ public class HiringManagerTest
     {
         assertEquals(bookManager.addBook(new Book("Taka sobie", Date.valueOf("2015-01-01"), 1)) , 1);
         assertEquals(readerManager.addReader(new Reader("Andrzej", "Koles", Date.valueOf("2015-10-20"), 2000)) , 1);
+        assertEquals(bookManager.addBook(new Book("Fajna", Date.valueOf("2015-01-01"), 1)) , 1);
+        assertEquals(readerManager.addReader(new Reader("Mateusz", "Zweigert", Date.valueOf("2011-01-01"), 11)) , 1);
+        
 
         book = bookManager.getAllBooks().get(0);
         reader = readerManager.getAllReaders().get(0);
         hiring = new Hiring(book.getIdBook(), reader.getIdReader(), Date.valueOf("2015-09-09"));
+        
+        //dodajemy rekord do bazy
+        assertEquals(hiringManager.addHiring(hiring), 1);
 
+        
+		book = bookManager.getAllBooks().get(1);
+        reader = readerManager.getAllReaders().get(1);
+        hiring = new Hiring(book.getIdBook(), reader.getIdReader(), Date.valueOf("2015-09-09"));
+        
+        
         //dodajemy rekord do bazy
         assertEquals(hiringManager.addHiring(hiring), 1);
 
         //sprawdzamy czy sie dodal, po dodaniu lista wszystkich rekordow w tabeli Hiring powinna wynosic 1
-        assertEquals(hiringManager.getAllHirings().size(), 1);
+        assertEquals(hiringManager.getAllHirings().size(), 2);
 
         //pobieramy rekord hiring z bazy
         hiring = hiringManager.getAllHirings().get(0);
@@ -90,8 +102,8 @@ public class HiringManagerTest
         //sprawdzamy czy funkcja zwroci 1 w przypadku powodzenia usuniecia
         assertEquals(hiringManager.deleteHiring(hiring), 1);
 
-        //po usuniecia ilosc rekordow w tabeli Hiring powinna wynosic 0
-        assertEquals(hiringManager.getAllHirings().size(), 0);
+        //po usuniecia ilosc rekordow w tabeli Hiring powinna wynosic 1
+        assertEquals(hiringManager.getAllHirings().size(), 1);
 
 
     }
